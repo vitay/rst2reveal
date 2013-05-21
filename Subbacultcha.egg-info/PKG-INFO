@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: Subbacultcha
+Version: 0.0.1
+Summary: ReST to Reveal.js convertor.
+Home-page: http://www.tu-chemnitz.de/informatik/KI/projects/ANNarchy/index.php
+Author: Julien Vitay
+Author-email: julien.vitay@informatik.tu-chemnitz.de
+License: GPLv2
+Description: ReST to Reveal.js convertor.
+Platform: GNU/Linux
+Platform: Windows

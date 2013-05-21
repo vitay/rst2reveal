@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+
+import subbacultcha        
+
+# Read the config file to read theme, etc
+theme = 'custom-beige' #default, beige, sky, night, serif, simple, solarized, moon, custom-night, custom-beige
+transition = 'fade' # default/cube/page/concave/zoom/linear/fade/none
+# Create the parser
+subba = subbacultcha.RSTParser(theme=theme, transition=transition)
+# Create the slides
+subba.create_slides()
