@@ -1,0 +1,90 @@
+#!/usr/bin/env python
+import os, sys
+import argparse
+import rst2reveal 
+isPygments=False
+try:
+    from pygments.styles import STYLE_MAP
+    isPygments=True
+except:
+    print "Pygments is not installed, code blocks won't be highlighted"
+
+# Allowed themes and transitions
+themes = ['default', 'beige', 'sky', 'night', 'serif', 'simple', 'solarized', 'moon']
+transitions = ['default', 'cube', 'page', 'concave', 'zoom', 'linear', 'fade', 'none']
+options=['input_file', 'output_file', 'theme', 'transition', 'mathjax_path']
+if isPygments:
+    pygments_styles=STYLE_MAP.keys()
+
+# Define arguments 
+parser = argparse.ArgumentParser()
+parser.add_argument("input_file", help="The name of the ReStructuredText file to parse.")
+parser.add_argument("-t", "--theme", type=str, choices=themes, help="The built-in theme to be used.")
+parser.add_argument("-tr", "--transition", type=str, choices=transitions, help="The transition to be used.")
+if isPygments:
+    parser.add_argument("-p", "--pygments_style", type=str, choices=pygments_styles, help="The style to be used for highlighting code with Pygments.")
+parser.add_argument("-o", "--output_file", type=str, help="The name of the HTML5 file to produce (by default the same basename as the input file with a .html suffix.")
+parser.add_argument("--mathjax_path", type=str, help="Path to the MathJax library (default: http://cdn.mathjax.org/mathjax/latest/MathJax.js).")
+args = parser.parse_args()
+   
+
+# Parse arguments
+input_file=args.input_file
+
+if input_file.endswith('.py'):
+    print 'reading from a configuration file'
+
+if args.theme:
+    if args.theme in themes:
+        theme = args.theme
+    else:
+        print 'Error: theme', args.theme, 'does not exist. Using default theme.'
+else:
+    theme = 'default' 
+    
+if args.transition:
+    if args.transition in transitions:
+        transition = args.transition
+    else:
+        print 'Error: transition', args.transition, 'does not exist. Using default transition.'
+else:
+    transition = 'default'
+    
+if isPygments:
+    if args.pygments_style:
+        if args.pygments_style in pygments_styles:
+            pygments_style = args.pygments_style
+        else:
+            print 'Error: Pygments style', args.pygments_style, 'does not exist. Using default style.'
+            pygments_style = ''
+    else:
+        pygments_style = ''
+else:
+    pygments_style = ''
+    
+if args.output_file:
+    output_file = args.output_file
+else:
+    output_file = '' 
+    
+if args.mathjax_path:
+    mathjax_path = args.mathjax_path
+    if os.path.isfile(mathjax_path):
+        mathjax_path = 'file://'+mathjax_path 
+    elif not mathjax_path.startswith('http://'): # file does not exists or is not a valid http address 
+        print 'Error: ', mathjax_path, 'does not exist.'
+        exit(0)
+else:
+    mathjax_path = ''
+
+# Create the RST parser
+parser = rst2reveal.RSTParser(  input_file=input_file, 
+                                theme=theme, 
+                                transition=transition, 
+                                mathjax_path=mathjax_path,
+                                pygments_style=pygments_style)
+
+# Create the slides
+parser.create_slides(output_file=output_file)
+
+print 'The output is in', parser.output_file

@@ -1,0 +1,312 @@
+__docformat__ = 'reStructuredText'
+
+
+import sys
+import os
+import os.path
+import time
+import re
+import urllib
+import PIL.Image
+import docutils
+from docutils import frontend, nodes, utils, writers, languages, io
+from docutils.utils.error_reporting import SafeString
+from docutils.transforms import writer_aux
+from docutils.utils.math import unichar2tex, pick_math_environment, math2html
+from docutils.utils.math.latex2mathml import parse_latex_math
+from docutils.writers.html4css1 import HTMLTranslator, Writer
+
+class RevealWriter(Writer):
+
+
+    visitor_attributes = (
+        'head_prefix', 'head', 'stylesheet', 'body_prefix',
+        'body_pre_docinfo', 'docinfo', 'body', 'body_suffix',
+        'title', 'subtitle', 'header', 'footer', 'meta', 'fragment',
+        'html_prolog', 'html_head', 'html_title', 'html_subtitle',
+        'html_body', 'metadata')
+
+                    
+class RevealTranslator(HTMLTranslator):
+
+    def __init__(self, document):
+        HTMLTranslator.__init__(self, document) 
+        self.math_output = 'mathjax' 
+        self.math_output_options 
+        self.metadata = []
+        self.subsection_previous =False
+        self.inline_lists = False
+    
+        
+    def visit_header(self, node):
+        self.context.append(len(self.body))
+
+    def depart_header(self, node):
+        start = self.context.pop()
+        header = [self.starttag(node, 'section')]
+        header.extend(self.body[start:])
+        header.append('\n</section>\n')
+        self.body_prefix.extend(header)
+        self.header.extend(header)
+        del self.body[start:]
+        
+    def visit_title(self, node):
+        """Only 6 section levels are supported by HTML."""
+        check_id = 0  # TODO: is this a bool (False) or a counter?
+        close_tag = '</p>\n'
+        if isinstance(node.parent, nodes.topic):
+            self.body.append(
+                  self.starttag(node, 'p', '', CLASS='topic-title first'))
+        elif isinstance(node.parent, nodes.sidebar):
+            self.body.append(
+                  self.starttag(node, 'p', '', CLASS='sidebar-title'))
+        elif isinstance(node.parent, nodes.Admonition):
+            self.body.append(
+                  self.starttag(node, 'p', '', CLASS='admonition-title'))
+        elif isinstance(node.parent, nodes.table):
+            self.body.append(
+                  self.starttag(node, 'caption', ''))
+            close_tag = '</caption>\n'
+        elif isinstance(node.parent, nodes.document):
+            self.body.append(self.starttag(node, 'h2'))
+            close_tag = '</h2>\n'
+            self.in_document_title = len(self.body)
+        else:
+            assert isinstance(node.parent, nodes.section)
+            self.body.append(self.starttag(node, 'h2', ''))
+            close_tag = '</h2>\n'
+        self.context.append(close_tag)
+
+    def depart_title(self, node):
+        self.body.append(self.context.pop())
+        if self.in_document_title:
+            self.title = self.body[self.in_document_title:-1]
+            self.in_document_title = 0
+            self.body_pre_docinfo.extend(self.body)
+            self.html_title.extend(self.body)
+            del self.body[:]
+            
+    def visit_section(self, node):
+        self.section_level += 1
+        if not self.section_level == 2:
+            self.body.append('<section>\n')
+        else:
+            self.body.append('</section>\n')
+        self.body.append('<section>\n')
+
+    def depart_section(self, node):
+        self.section_level -= 1
+        if not self.section_level == 1:
+            self.subsection_previous =False
+            self.body.append('</section>\n')
+        else:
+            self.subsection_previous =True
+        if not self.subsection_previous:
+            self.body.append('</section>\n\n')
+        self.inline_lists = False
+        
+    def visit_literal(self, node):
+        # special case: "code" role
+        classes = node.get('classes', [])
+        if 'code' in classes:
+            # filter 'code' from class arguments
+            node['classes'] = [cls for cls in classes if cls != 'code']
+            self.body.append(self.starttag(node, 'code'))
+            return
+        self.body.append(
+            self.starttag(node, 'code'))
+        text = node.astext()
+        for token in self.words_and_spaces.findall(text):
+            if token.strip():
+                # Protect text like "--an-option" and the regular expression
+                # ``[+]?(\d+(\.\d*)?|\.\d+)`` from bad line wrapping
+                if self.sollbruchstelle.search(token):
+                    self.body.append('<span class="pre">%s</span>'
+                                     % self.encode(token))
+                else:
+                    self.body.append(self.encode(token))
+            elif token in ('\n', ' '):
+                # Allow breaks at whitespace:
+                self.body.append(token)
+            else:
+                # Protect runs of multiple spaces; the last space can wrap:
+                self.body.append('&nbsp;' * (len(token) - 1) + ' ')
+        self.body.append('</code>')
+        # Content already processed:
+        raise nodes.SkipNode
+
+    def depart_literal(self, node):
+        # skipped unless literal element is from "code" role:
+        self.body.append('</code>')
+        
+
+    def visit_literal_block(self, node):
+        classes = node.get('classes', [])
+        if 'code' in classes:
+            node['classes'] = [cls for cls in classes if cls != 'code']
+        self.body.append('\n<pre>')
+        self.body.append(self.starttag(node, 'code'))        
+        text = node.astext()
+        for token in self.words_and_spaces.findall(text):
+            if token.strip():
+                self.body.append(self.encode(token))
+            elif token in ('\n', ' '):
+                # Allow breaks at whitespace:
+                self.body.append(token)
+            else:
+                # Protect runs of multiple spaces; the last space can wrap:
+                self.body.append('&nbsp;' * (len(token) - 1) + ' ')
+        self.body.append('\n</code></pre>\n')
+        raise nodes.SkipNode
+        
+    def depart_literal_block(self, node):
+        self.body.append('\n</code></pre>\n')
+        
+    def visit_docinfo(self, node):
+        self.context.append(len(self.body))
+        self.in_docinfo = True
+
+    def depart_docinfo(self, node):
+        self.in_docinfo = False
+        start = self.context.pop()
+        self.docinfo = self.body[start:]
+        self.body = []
+
+    def visit_docinfo_item(self, node, name, meta=True):
+        self.metadata.append(name + '=' + str(node)+'\n')
+        self.body.append(self.starttag(node, 'tr', ''))
+        if len(node):
+            if isinstance(node[0], nodes.Element):
+                node[0]['classes'].append('first')
+            if isinstance(node[-1], nodes.Element):
+                node[-1]['classes'].append('last')
+
+    def depart_docinfo_item(self):
+        pass
+        
+    def visit_field(self, node):
+        pass
+
+    def depart_field(self, node):
+        pass
+
+    def visit_field_body(self, node):
+        name = re.findall(r'<field_name classes="docinfo-name">(.+)</field_name>', str(node.parent[0]))[0]
+        value = re.findall(r'<field_body>(.+)</field_body>', str(node.parent[1]))[0]
+        self.metadata.append(name + '=' + value + '\n')
+        
+    def depart_field_body(self, node):
+        pass
+        
+    def visit_block_quote(self, node):
+        if not isinstance(node.parent, nodes.list_item):
+            self.body.append(self.starttag(node, 'blockquote'))
+
+    def depart_block_quote(self, node):
+        if not isinstance(node.parent, nodes.list_item):
+            self.body.append('</blockquote>\n')
+        
+
+    def visit_image(self, node):
+        atts = {}
+        uri = node['uri']
+        # place SWF images in an <object> element
+        types = {'.swf': 'application/x-shockwave-flash'}
+        ext = os.path.splitext(uri)[1].lower()
+        if ext in ('.swf'):
+            atts['data'] = uri
+            atts['type'] = types[ext]
+        else:
+            atts['src'] = uri
+            atts['alt'] = node.get('alt', uri)
+        # image size
+        if 'width' in node:
+            atts['width'] = node['width']
+        if 'height' in node:
+            atts['height'] = node['height']
+        if 'scale' in node:
+            if (PIL and not ('width' in node and 'height' in node)
+                and self.settings.file_insertion_enabled):
+                imagepath = urllib.url2pathname(uri)
+                try:
+                    img = PIL.Image.open(
+                            imagepath.encode(sys.getfilesystemencoding()))
+                except (IOError, UnicodeEncodeError):
+                    pass # TODO: warn?
+                else:
+                    self.settings.record_dependencies.add(
+                        imagepath.replace('\\', '/'))
+                    if 'width' not in atts:
+                        atts['width'] = str(img.size[0])
+                    if 'height' not in atts:
+                        atts['height'] = str(img.size[1])
+                    del img
+            for att_name in 'width', 'height':
+                if att_name in atts:
+                    match = re.match(r'([0-9.]+)(\S*)$', atts[att_name])
+                    assert match
+                    atts[att_name] = '%s%s' % (
+                        float(match.group(1)) * (float(node['scale']) / 100),
+                        match.group(2))
+        style = []
+        for att_name in 'width', 'height':
+            if att_name in atts:
+                if re.match(r'^[0-9.]+$', atts[att_name]):
+                    # Interpret unitless values as pixels.
+                    atts[att_name] += 'px'
+                style.append('%s: %s;' % (att_name, atts[att_name]))
+                del atts[att_name]
+        if style:
+            atts['style'] = ' '.join(style)
+        if (isinstance(node.parent, nodes.TextElement) or
+            (isinstance(node.parent, nodes.reference) and
+             not isinstance(node.parent.parent, nodes.TextElement))):
+            # Inline context or surrounded by <a>...</a>.
+            suffix = ''
+        else:
+            suffix = '\n'
+        if 'align' in node:
+            atts['class'] = 'align-%s' % node['align']
+            if node['align'] in ['left', 'right']:
+                self.inline_lists = True
+        self.context.append('')
+        if ext in ('.swf'): # place in an object element,
+            # do NOT use an empty tag: incorrect rendering in browsers
+            self.body.append(self.starttag(node, 'object', suffix, **atts) +
+                             node.get('alt', uri) + '</object>' + suffix)
+        else:
+            self.body.append('<div>\n')
+            self.body.append(self.emptytag(node, 'img', suffix, **atts))
+            self.body.append('</div>\n')
+
+    def depart_image(self, node):
+        self.body.append(self.context.pop())
+
+        
+    def visit_bullet_list(self, node):
+        atts = {}
+        old_compact_simple = self.compact_simple
+        self.context.append((self.compact_simple, self.compact_p))
+        self.compact_p = None
+        self.compact_simple = self.is_compactable(node)
+        if self.compact_simple and not old_compact_simple:
+            atts['class'] = 'simple'
+        if self.inline_lists: # the list  should wrap an image
+            self.body.append('<ul style="display: inline;">')
+        else:
+            self.body.append(self.starttag(node, 'ul', **atts))
+
+    def depart_bullet_list(self, node):
+        self.compact_simple, self.compact_p = self.context.pop()
+        self.body.append('</ul>\n')
+        
+    def visit_list_item(self, node):
+        if 'fragment' in node.parent['classes']:
+            self.body.append(self.starttag(node, 'li', '', CLASS='fragment'))
+        else:
+            self.body.append(self.starttag(node, 'li', ''))
+        if len(node):
+            node[0]['classes'].append('first')
+
+    def depart_list_item(self, node):
+        self.body.append('</li>\n')

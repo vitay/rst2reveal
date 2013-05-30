@@ -1,0 +1,21 @@
+Works:
+
+* Bullet/numbered lists
+* Nested lists
+* code
+* subsections (tricky doubling of <section>, but works)
+* inline markup (bold, emph...)
+* videos
+* incremental (paragraphs only)
+* math
+* raw html
+
+TODO:
+
+* admonitions
+* template for title slide
+* align images right/left
+* incremental on lists
+* other math interpreter than mathjs
+* user-defined css (e.g. police)
+* align left as option, title on top, not middle
