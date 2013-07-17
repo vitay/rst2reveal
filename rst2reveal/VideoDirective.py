@@ -2,10 +2,12 @@ from docutils import nodes
 from docutils.parsers.rst import directives
 
 CODE = """\
-    <video style="display:inline; float:%(align)s" width="%(width)s" %(autoplay)s %(loop)s controls>
+    <div class="align-%(align)s">
+    <video style="text-align:%(align)s; float:%(align)s" width="%(width)s" %(autoplay)s %(loop)s controls>
       <source src="%(filename)s" type="video/webm">
       Your browser does not support the video tag.
     </video>
+    </div>
 """
 
 

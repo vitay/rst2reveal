@@ -1,6 +1,5 @@
 __docformat__ = 'reStructuredText'
 
-
 import sys
 import os
 import os.path
@@ -32,7 +31,6 @@ class RevealTranslator(HTMLTranslator):
     def __init__(self, document):
         HTMLTranslator.__init__(self, document) 
         self.math_output = 'mathjax' 
-        self.math_output_options 
         self.metadata = []
         self.subsection_previous =False
         self.inline_lists = False
@@ -86,6 +84,7 @@ class RevealTranslator(HTMLTranslator):
             self.html_title.extend(self.body)
             del self.body[:]
             
+            
     def visit_section(self, node):
         self.section_level += 1
         if not self.section_level == 2:
@@ -104,63 +103,6 @@ class RevealTranslator(HTMLTranslator):
         if not self.subsection_previous:
             self.body.append('</section>\n\n')
         self.inline_lists = False
-        
-    def visit_literal(self, node):
-        # special case: "code" role
-        classes = node.get('classes', [])
-        if 'code' in classes:
-            # filter 'code' from class arguments
-            node['classes'] = [cls for cls in classes if cls != 'code']
-            self.body.append(self.starttag(node, 'code'))
-            return
-        self.body.append(
-            self.starttag(node, 'code'))
-        text = node.astext()
-        for token in self.words_and_spaces.findall(text):
-            if token.strip():
-                # Protect text like "--an-option" and the regular expression
-                # ``[+]?(\d+(\.\d*)?|\.\d+)`` from bad line wrapping
-                if self.sollbruchstelle.search(token):
-                    self.body.append('<span class="pre">%s</span>'
-                                     % self.encode(token))
-                else:
-                    self.body.append(self.encode(token))
-            elif token in ('\n', ' '):
-                # Allow breaks at whitespace:
-                self.body.append(token)
-            else:
-                # Protect runs of multiple spaces; the last space can wrap:
-                self.body.append('&nbsp;' * (len(token) - 1) + ' ')
-        self.body.append('</code>')
-        # Content already processed:
-        raise nodes.SkipNode
-
-    def depart_literal(self, node):
-        # skipped unless literal element is from "code" role:
-        self.body.append('</code>')
-        
-
-    def visit_literal_block(self, node):
-        classes = node.get('classes', [])
-        if 'code' in classes:
-            node['classes'] = [cls for cls in classes if cls != 'code']
-        self.body.append('\n<pre>')
-        self.body.append(self.starttag(node, 'code'))        
-        text = node.astext()
-        for token in self.words_and_spaces.findall(text):
-            if token.strip():
-                self.body.append(self.encode(token))
-            elif token in ('\n', ' '):
-                # Allow breaks at whitespace:
-                self.body.append(token)
-            else:
-                # Protect runs of multiple spaces; the last space can wrap:
-                self.body.append('&nbsp;' * (len(token) - 1) + ' ')
-        self.body.append('\n</code></pre>\n')
-        raise nodes.SkipNode
-        
-    def depart_literal_block(self, node):
-        self.body.append('\n</code></pre>\n')
         
     def visit_docinfo(self, node):
         self.context.append(len(self.body))
@@ -265,8 +207,10 @@ class RevealTranslator(HTMLTranslator):
             suffix = ''
         else:
             suffix = '\n'
+        align='align-center'
         if 'align' in node:
             atts['class'] = 'align-%s' % node['align']
+            align=atts['class']
             if node['align'] in ['left', 'right']:
                 self.inline_lists = True
         self.context.append('')
@@ -275,7 +219,7 @@ class RevealTranslator(HTMLTranslator):
             self.body.append(self.starttag(node, 'object', suffix, **atts) +
                              node.get('alt', uri) + '</object>' + suffix)
         else:
-            self.body.append('<div>\n')
+            self.body.append('<div class=\"'+align+'\">\n')
             self.body.append(self.emptytag(node, 'img', suffix, **atts))
             self.body.append('</div>\n')
 
@@ -289,6 +233,11 @@ class RevealTranslator(HTMLTranslator):
         self.context.append((self.compact_simple, self.compact_p))
         self.compact_p = None
         self.compact_simple = self.is_compactable(node)
+        
+        if 'fragment' in node['classes']:
+            node['classes'].remove('fragment')
+            node['classes'].append('fragmented_list')
+            
         if self.compact_simple and not old_compact_simple:
             atts['class'] = 'simple'
         if self.inline_lists: # the list  should wrap an image
@@ -300,8 +249,36 @@ class RevealTranslator(HTMLTranslator):
         self.compact_simple, self.compact_p = self.context.pop()
         self.body.append('</ul>\n')
         
+    def visit_enumerated_list(self, node):
+        """
+        The 'start' attribute does not conform to HTML 4.01's strict.dtd, but
+        CSS1 doesn't help. CSS2 isn't widely enough supported yet to be
+        usable.
+        """
+        atts = {}
+        if 'start' in node:
+            atts['start'] = node['start']
+        if 'enumtype' in node:
+            atts['class'] = node['enumtype']
+        # @@@ To do: prefix, suffix. How? Change prefix/suffix to a
+        # single "format" attribute? Use CSS2?
+        old_compact_simple = self.compact_simple
+        self.context.append((self.compact_simple, self.compact_p))
+        self.compact_p = None
+        self.compact_simple = self.is_compactable(node)
+        if 'fragment' in node['classes']:
+            node['classes'].remove('fragment')
+            node['classes'].append('fragmented_list')
+        if self.compact_simple and not old_compact_simple:
+            atts['class'] = (atts.get('class', '') + ' simple').strip()
+        self.body.append(self.starttag(node, 'ol', **atts))
+
+    def depart_enumerated_list(self, node):
+        self.compact_simple, self.compact_p = self.context.pop()
+        self.body.append('</ol>\n')
+                
     def visit_list_item(self, node):
-        if 'fragment' in node.parent['classes']:
+        if 'fragmented_list' in node.parent['classes']:
             self.body.append(self.starttag(node, 'li', '', CLASS='fragment'))
         else:
             self.body.append(self.starttag(node, 'li', ''))

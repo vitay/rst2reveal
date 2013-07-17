@@ -1,25 +1,17 @@
 /*********************************************
- * HEADERS
- *********************************************/
-.reveal h1,
-.reveal h2,
-.reveal h3,
-.reveal h4,
-.reveal h5,
-.reveal h6 {
-  margin: 0 0 20px 0;
-  color: #333333;
-  font-family: "League Gothic", Impact, sans-serif;
-  line-height: 0.9em;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  text-shadow: none; 
-  position: top;  
-}
-  
-/*********************************************
  * IMAGES
  *********************************************/  
+
+.align-center {  
+    text-align: center; 
+}
+.align-left {  
+    text-align: left; 
+}
+.align-right {  
+    text-align: right; 
+}
+
 .reveal img.align-right {  
     display: inline;
     float: right;
@@ -34,10 +26,26 @@
     box-shadow: none;
 }
 
-.reveal img.align-center {  
+.reveal img.align-center { 
+    margin: 0 auto;  
+    margin-bottom: 10px;
+    display: inline;
+    float: center;
     border: none;
     box-shadow: none;
 }
+  
+/*********************************************
+ * VIDEOS
+ *********************************************/  
+
+.reveal video {  
+    display: inline;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 10px;
+}
+
 
 /*********************************************
  * CODE
@@ -47,3 +55,25 @@
     box-shadow: none;
 }
 
+/*********************************************
+ * LISTS
+ *********************************************/
+.reveal ul {
+    margin-bottom: 10px;
+}
+.reveal ol {
+    margin-bottom: 10px;
+}
+.reveal li {
+    margin-bottom: 5px;
+}
+
+
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+#slide-number {
+    margin: 10px auto;
+    display: inline;
+    float:right;
+}

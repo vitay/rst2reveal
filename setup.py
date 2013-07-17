@@ -43,7 +43,8 @@ setup(  name='rst2reveal',
 		author_email='julien.vitay@informatik.tu-chemnitz.de',
 		url='http://www.tu-chemnitz.de/~vitay',
         packages=find_packages(),
-        package_data={'rst2reveal': ['reveal.tar.gz']},
+        package_data={'reveal': ['*.css', '*.js', '*.eot', '*.svg', '*.woff', '*.py', '*.md', '*.html']},
+        include_package_data=True,
         scripts = ['scripts/rst2reveal']
  )
 

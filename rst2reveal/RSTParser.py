@@ -13,14 +13,22 @@ from RevealTranslator import RevealTranslator, RevealWriter
 
 class RSTParser:
     
-    def __init__(self, input_file='index.rst', theme='default', transition = 'default', mathjax_path='', pygments_style=''):
+    def __init__(self, input_file='index.rst', output_file='', theme='default', stylesheet='', transition = 'default', mathjax_path='', pygments_style='', vertical_center=False, horizontal_center=False, title_center=False, footer=True, page_number=True, controls=False, firstslide_template='', footer_template=''):
     
         # Input file
         self.input_file = input_file
+        self.output_file = output_file
         
         # Style
         self.theme = theme 
+        self.stylesheet = stylesheet
         self.transition = transition 
+        self.vertical_center=vertical_center
+        self.horizontal_center = horizontal_center
+        self.title_center = title_center
+        self.write_footer=footer
+        self.page_number=page_number
+        self.controls=controls
         
         # MathJax
         if mathjax_path =='':
@@ -30,11 +38,16 @@ class RSTParser:
             
         # Pygments
         self.pygments_style = pygments_style
-
-    def create_slides(self, output_file=''):
-    
-        self.output_file = output_file
         
+        # Template for the first slide
+        self.firstslide_template = firstslide_template
+        
+        # Temnplate for the footer
+        self.footer_template = footer_template
+        
+
+    def create_slides(self):
+    
         # Copy the reveal library in the current directory
         self.copy_reveal()
         
@@ -48,18 +61,13 @@ class RSTParser:
         self.produce_output()
         
     def copy_reveal(self):
-    
-        curr_dir = os.path.realpath(self.output_file)
+        curr_dir = os.path.dirname(os.path.realpath(self.output_file))
         cwd = os.getcwd()
         if not os.path.isdir(curr_dir+'/reveal'):
-            sources_dir = os.path.abspath(os.path.dirname(__file__)+'/reveal.tar.gz')
+            sources_dir = os.path.abspath(os.path.dirname(__file__)+'/reveal')
             import shutil, tarfile
-            shutil.copyfile(sources_dir, curr_dir+'/reveal.tar.gz')
+            shutil.copytree(sources_dir, curr_dir+'/reveal')
             os.chdir(curr_dir)
-            tar = tarfile.open("reveal.tar.gz")
-            tar.extractall()
-            tar.close()
-            os.remove("reveal.tar.gz")
             os.chdir(cwd)
         if not self.pygments_style == '':
             os.chdir(curr_dir) 
@@ -84,8 +92,6 @@ class RSTParser:
         
         document_content = header + body + footer
         
-        if self.output_file == '':
-            self.output_file= os.path.splitext(self.input_file)[0]+'.html'
 
         with open(self.output_file, 'w') as wfile:
             wfile.write(document_content)
@@ -128,55 +134,80 @@ class RSTParser:
                 content=t.replace(name+'=', '')
                 content=clean(content)
                 self.meta_info[name]= content
+                
         
+        if self.parts['subtitle'] != '': # defined with a underlined text instead of :subtitle:
+            self.meta_info['subtitle'] = self.parts['subtitle']
+            
         self.generate_titleslide()
         
     def generate_titleslide(self):
-    
-        title='<h1>'+self.title+'</h1>'
+        
         
         if 'subtitle' in self.meta_info.keys():
-            subtitle = '<h3>'+ self.meta_info['subtitle'] + '</h3>'
+            self.subtitle = self.meta_info['subtitle']
         else:
-            subtitle='' 
+            self.subtitle=''    
+        
+        if 'email' in self.meta_info.keys():
+            self.email= self.meta_info['email']
+        else:
+            self.email=''
+            
+        if 'institution' in self.meta_info.keys():
+            self.institution= self.meta_info['institution']
+        else:
+            self.institution=''
             
         if 'author' in self.meta_info.keys():
-            if 'email' in self.meta_info.keys():
-                email=self.meta_info['email']
-            else:
-                email=''
-            if 'institution' in self.meta_info.keys():
-                institution=' - ' + self.meta_info['institution']
-            else:
-                institution=''
-            author = '<p><a href=\"'+ email + '\">' + self.meta_info['author'] + '</a>'+institution+'</p>'
+            self.author = self.meta_info['author']
         else:
-            author='' 
-            
-        if 'email' in self.meta_info.keys():
-            email='<p><small>' + self.meta_info['email'] + '</small></p>'
-        else:
-            email=''
+            self.author='' 
             
         if 'date' in self.meta_info.keys():
-            date='<p>' + self.meta_info['date'] + '</p>'
+            self.date = self.meta_info['date'] 
         else:
-            date=''
-    
-        self.titleslide="""
-<section>
-    %(title)s
-    %(subtitle)s
+            self.date=''  
+            
+        if self.firstslide_template == "":
+             self.firstslide_template = """
+    <h1>%(title)s</h1>
+    <h3>%(subtitle)s</h3>
     <br>
-    %(author)s
-    %(email)s
-    %(date)s
+    <p><a href="mailto:%(email)s">%(author)s</a> %(is_institution)s %(institution)s</p>
+    <p><small>%(email)s</small></p>
+    <p>%(date)s</p>
+""" 
+         
+        self.titleslide="""
+<section class="titleslide">""" + self.firstslide_template % {  'title' : self.title,
+        'subtitle' : self.subtitle,
+        'author' : self.author,
+        'is_institution' : '-' if self.institution is not '' else '',
+        'institution' : self.institution,
+        'email' : self.email ,
+        'date' : self.date } + """
 </section>
-"""% {  'title' : title,
-        'subtitle' : subtitle,
-        'author' : author,
-        'email' : email ,
-        'date' : date }
+"""
+        if self.footer_template=="":
+            self.footer_template = """<b>%(title)s %(is_subtitle)s %(subtitle)s.</b> %(author)s%(is_institution)s %(institution)s. %(date)s"""
+        
+        if self.write_footer:
+            self.footer_html = """<footer id=\"footer\">""" + self.footer_template % {'title' : self.title,
+            'is_subtitle' : '-' if self.subtitle is not '' else '',
+            'subtitle' : self.subtitle,
+            'is_author' : '.' if self.author is not '' else '',
+            'author' : self.author,
+            'is_institution' : ' - ' if self.institution is not '' else '',
+            'institution' : self.institution,
+            'email' : self.email ,
+            'date' : self.date } +  """<b id=\"slide_number\" style=\"padding: 1em;\"></b></footer>"""
+        elif self.page_number:
+            self.footer_html =  """<footer><b id=\"slide_number\"></b></footer>"""
+        else:
+            self.footer_html =  ""
+            
+        
         
     def generate_header(self):
 
@@ -189,17 +220,24 @@ class RSTParser:
 		        %(meta)s
 		        <meta name="apple-mobile-web-app-capable" content="yes" />
 		        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
 		        <link rel="stylesheet" href="reveal/css/reveal.min.css">
 		        <link rel="stylesheet" href="reveal/css/pygments.css">
-		        <link rel="stylesheet" href="reveal/css/theme/%(theme)s.css" id="theme">
-		        <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
 		        <link rel="stylesheet" href="reveal/css/rst2reveal.css">
-		        <script>
-			        document.write( '<link rel="stylesheet" href="reveal/css/print/pdf.css" type="text/css" media="print">' );
-		        </script>
-                <script type="text/javascript" src="%(mathjax_path)s?config=TeX-AMS-MML_HTMLorMML"></script>
-
+		        <link rel="stylesheet" href="reveal/css/theme/default.css" id="theme">
+		        <link rel="stylesheet" href="reveal/css/theme/%(theme)s.css" id="theme">
+		        <link rel="stylesheet" href="reveal/css/print/pdf.css" type="text/css" media="print"> 
+		        <script type="text/javascript" src="%(mathjax_path)s?config=TeX-AMS-MML_HTMLorMML"></script>
+		        <!-- Extra styles -->
+                <style>
+                    .reveal section {
+                      text-align: %(horizontal_center)s; 
+                    }
+                    .reveal h2{
+                      text-align: %(title_center)s; 
+                    }
+                </style>
+                %(custom_stylesheet)s
 		        <!--[if lt IE 9]>
 		        <script src="reveal/lib/js/html5shiv.js"></script>
 		        <![endif]-->
@@ -207,13 +245,38 @@ class RSTParser:
         """%{'title': self.title,
              'meta' : self.parts['meta'],
              'theme': self.theme,
-             'mathjax_path': self.mathjax_path}
+             'mathjax_path': self.mathjax_path,
+             'horizontal_center': 'center' if self.horizontal_center else 'left',
+             'title_center': 'center' if self.title_center else 'left',
+             'custom_stylesheet' : '<link rel="stylesheet" href="%s">'%self.stylesheet if not self.stylesheet is '' else ''}
              
         return header
              
              
     def generate_footer(self):
     
+        if self.page_number:
+            script_page_number = """
+		            <script>                 
+                        // Fires each time a new slide is activated
+                        Reveal.addEventListener( 'slidechanged', function( event ) {
+                            if(event.indexh > 0) {
+                                if(event.indexv > 0) {
+                                    val = event.indexh + ' - ' + event.indexv
+                                    document.getElementById('slide_number').innerHTML = val;
+                                }
+                                else{
+                                    document.getElementById('slide_number').innerHTML = event.indexh;
+                                }
+                            }
+                            else {
+                                document.getElementById('slide_number').innerHTML = '';
+                            }  
+                        } );
+                    </script>"""
+        else:
+            script_page_number = ""
+     
         footer="""
 		        <script src="reveal/lib/js/head.min.js"></script>
 		        <script src="reveal/js/reveal.min.js"></script>
@@ -221,27 +284,33 @@ class RSTParser:
 			        // Full list of configuration options available here:
 			        // https://github.com/hakimel/reveal.js#configuration
 			        Reveal.initialize({
-				        controls: true,
+				        controls: %(controls)s,
 				        progress: false,
 				        history: true,
 				        overview: true,
-				        center: true,
+				        keyboard: true,
+				        loop: false,
+				        touch: true,
+				        rtl: false,
+				        center: %(vertical_center)s,
 				        mouseWheel: true,
-				        transition: '%(transition)s', 
-				        // Optional libraries used to extend on reveal.js
-				        dependencies: [
-					        { src: 'reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					        { src: 'reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					        { src: 'reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				        ]
+				        fragments: true,
+				        rollingLinks: false,
+				        transition: '%(transition)s'
 			        });
 		        </script>
+            %(script_page_number)s
+		    
+	        %(footer)s
 	        </body>
-        </html>""" % {'transition' : self.transition}
+        </html>""" % {'transition' : self.transition,
+                        'footer' : self.footer_html,
+                        'script_page_number' : script_page_number,
+                        'vertical_center' : 'true' if self.vertical_center else 'false',
+                        'controls': 'true' if self.controls else 'false'}
 
         return footer
             
-#					        { src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					        
 if __name__ == '__main__':
     # Create the object

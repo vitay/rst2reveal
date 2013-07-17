@@ -2,6 +2,8 @@
 import os, sys
 import argparse
 import rst2reveal 
+
+# Test the presence of Pygments
 isPygments=False
 try:
     from pygments.styles import STYLE_MAP
@@ -10,81 +12,269 @@ except:
     print "Pygments is not installed, code blocks won't be highlighted"
 
 # Allowed themes and transitions
-themes = ['default', 'beige', 'sky', 'night', 'serif', 'simple', 'solarized', 'moon']
+themes = ['default', 'beige', 'night']
 transitions = ['default', 'cube', 'page', 'concave', 'zoom', 'linear', 'fade', 'none']
-options=['input_file', 'output_file', 'theme', 'transition', 'mathjax_path']
+options=['input_file', 'output_file', 'theme', 'transition', 'mathjax_path', 'pygments_style']
 if isPygments:
     pygments_styles=STYLE_MAP.keys()
 
 # Define arguments 
 parser = argparse.ArgumentParser()
-parser.add_argument("input_file", help="The name of the ReStructuredText file to parse.")
+parser.description="""rst2reveal: ReST to Reveal.js slide generator."""
+# Name of the ReST file to process
+parser.add_argument("input_file", help="The name of the ReStructuredText file to parse (.rst or .txt) or a configuration file defining all the options (.ini, .conf, .cfg).")
+# Generates a configuration file
+parser.add_argument("--generate_configuration", type=str, help="Generates a default configuration file (extension must be .ini, .cfg or .conf).")
+# Theme to use
 parser.add_argument("-t", "--theme", type=str, choices=themes, help="The built-in theme to be used.")
+# Custom stylesheet
+parser.add_argument("-s", "--stylesheet", type=str, help="A custom CSS file that will be called after all other CSS files, including the chosen theme if any.")
+# Transition
 parser.add_argument("-tr", "--transition", type=str, choices=transitions, help="The transition to be used.")
+# Pygments
 if isPygments:
     parser.add_argument("-p", "--pygments_style", type=str, choices=pygments_styles, help="The style to be used for highlighting code with Pygments.")
+# Generated HTML file
 parser.add_argument("-o", "--output_file", type=str, help="The name of the HTML5 file to produce (by default the same basename as the input file with a .html suffix.")
+# Path to the MathJax.js file
 parser.add_argument("--mathjax_path", type=str, help="Path to the MathJax library (default: http://cdn.mathjax.org/mathjax/latest/MathJax.js).")
+# Vertical centering of the slides
+parser.add_argument("--vertical_center", action='store_true', help='Defines whether the slide content should be vertically centered (default: False).')
+# Horizontal centering of the slides
+parser.add_argument("--horizontal_center", action='store_true', help='Defines whether the slide content should be horizontally centered (default: False).')
+# Horizontal centering of the titles
+parser.add_argument("--title_center", action='store_true', help='Defines whether the slide titles should be horizontally centered (default: False).')
+# Global centering 
+parser.add_argument("--center", action='store_true', help='Overrides the vertical_center, horizontal_center and title_center flags (default: False).')
+# Footer
+parser.add_argument("--footer", action='store_true', help='Defines whether a footer line should be printed (default: False).')
+# Slide numbers
+parser.add_argument("--numbering", action='store_true', help='Defines whether the slide numbers should be displayed in the footer (default: False).')
+# Controls
+parser.add_argument("--controls", action='store_true', help='Defines whether the control arrows should be displayed (default: False).')
+# Global function 
+parser.add_argument("--all", action='store_true', help='Applies all tuning flags: vertical_center, horizontal_center, title_center, footer and numerate (default: False).')
+
 args = parser.parse_args()
    
 
 # Parse arguments
 input_file=args.input_file
-
-if input_file.endswith('.py'):
-    print 'reading from a configuration file'
-
-if args.theme:
-    if args.theme in themes:
-        theme = args.theme
-    else:
-        print 'Error: theme', args.theme, 'does not exist. Using default theme.'
-else:
-    theme = 'default' 
-    
-if args.transition:
-    if args.transition in transitions:
-        transition = args.transition
-    else:
-        print 'Error: transition', args.transition, 'does not exist. Using default transition.'
-else:
-    transition = 'default'
-    
-if isPygments:
-    if args.pygments_style:
-        if args.pygments_style in pygments_styles:
-            pygments_style = args.pygments_style
-        else:
-            print 'Error: Pygments style', args.pygments_style, 'does not exist. Using default style.'
-            pygments_style = ''
-    else:
+if input_file.split('.')[-1] in ['conf', 'cfg', 'ini']:
+    print 'Reading from the configuration file', input_file + '.'
+    import ConfigParser 
+    parser = ConfigParser.RawConfigParser()
+    parser.read(input_file)
+    # input file name
+    filename= parser.get('rst2reveal', 'input_file')
+    # theme
+    try:
+        theme = parser.get('rst2reveal', 'theme')
+    except:
+        theme = 'default'
+    # stylesheet
+    try:
+        stylesheet = parser.get('rst2reveal', 'stylesheet')
+    except:
+        stylesheet = ''
+    # transition
+    try:
+        transition = parser.get('rst2reveal', 'transition')
+    except:
+        transition = 'default'
+    # pygments_style
+    try:
+        pygments_style = parser.get('rst2reveal', 'pygments_style')
+    except:
         pygments_style = ''
+    # stylesheet
+    try:
+        stylesheet = parser.get('rst2reveal', 'stylesheet')
+    except:
+        stylesheet = ''
+    # output_file
+    try:
+        output_file = parser.get('rst2reveal', 'output_file')
+    except:
+        output_file = ''
+    # mathjax_path
+    try:
+        mathjax_path = parser.get('rst2reveal', 'mathjax_path')
+    except:
+        mathjax_path = ''
+    # vertical_center
+    try:
+        vertical_center = parser.getboolean('rst2reveal', 'vertical_center') 
+    except:
+        vertical_center = False
+    # horizontal_center
+    try:
+        horizontal_center = parser.getboolean('rst2reveal', 'horizontal_center')
+    except:
+        horizontal_center = False
+    # title_center
+    try:
+        title_center = parser.getboolean('rst2reveal', 'title_center') 
+    except:
+        title_center = False
+    # footer
+    try:
+        footer = parser.getboolean('rst2reveal', 'footer') 
+    except:
+        footer = False
+    # numbering
+    try:
+        numbering = parser.getboolean('rst2reveal', 'numbering') 
+    except:
+        numbering = False
+    # controls
+    try:
+        controls = parser.getboolean('rst2reveal', 'controls') 
+    except:
+        controls = False
+    # first slide
+    try:
+        firstslide_template = parser.get('firstslide', 'template')
+    except:
+        firstslide_template = ''
+    # footer
+    try:
+        footer_template = parser.get('footer', 'template')
+    except:
+        footer_template = ''
 else:
-    pygments_style = ''
+    # input file name
+    filename = args.input_file
+    # output file name   
+    if args.output_file:
+        output_file = args.output_file
+    else:
+        output_file = filename.split('.')[-2]+'.html' 
+    # theme
+    if args.theme:
+        if args.theme in themes:
+            theme = args.theme
+        else:
+            print 'Error: theme', args.theme, 'does not exist. Using default theme.'
+    else:
+        theme = 'default' 
+    # stylesheet
+    if args.stylesheet:
+        stylesheet = args.stylesheet
+    else:
+        stylesheet = ''
+    # transition
+    if args.transition:
+        if args.transition in transitions:
+            transition = args.transition
+        else:
+            print 'Error: transition', args.transition, 'does not exist. Using default transition.'
+    else:
+        transition = 'default'
+    # pygments 
+    if isPygments:
+        if args.pygments_style:
+            if args.pygments_style in pygments_styles:
+                pygments_style = args.pygments_style
+            else:
+                print 'Error: Pygments style', args.pygments_style, 'does not exist. Using default style.'
+                pygments_style = 'default'
+        else:
+            pygments_style = 'default'
+    else:
+        pygments_style = 'default'
+    # mathjax_path
+    if args.mathjax_path:
+        mathjax_path = args.mathjax_path
+        if os.path.isfile(mathjax_path):
+            mathjax_path = 'file://'+mathjax_path 
+        elif not mathjax_path.startswith('http://'): # file does not exists or is not a valid http address 
+            print 'Error: ', mathjax_path, 'does not exist.'
+            exit(0)
+    else:
+        mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js'
+    # controls
+    controls = args.controls
+    # first slide and footer (only through the config file)
+    firstslide_template=''
+    footer_template=''
     
-if args.output_file:
-    output_file = args.output_file
-else:
-    output_file = '' 
-    
-if args.mathjax_path:
-    mathjax_path = args.mathjax_path
-    if os.path.isfile(mathjax_path):
-        mathjax_path = 'file://'+mathjax_path 
-    elif not mathjax_path.startswith('http://'): # file does not exists or is not a valid http address 
-        print 'Error: ', mathjax_path, 'does not exist.'
-        exit(0)
-else:
-    mathjax_path = ''
+    # Check the global flags
+    vertical_center = args.vertical_center
+    horizontal_center = args.horizontal_center
+    title_center = args.title_center 
+    footer = args.footer
+    numbering = args.numbering
+    if args.center:
+        vertical_center = True
+        horizontal_center = True
+        title_center = True
+    if args.all:
+        vertical_center = True
+        horizontal_center = True
+        title_center = True
+        footer = True
+        numerate = True
+        
+    # Generate a configuration file
+    if args.generate_configuration:
+        if args.generate_configuration.split('.')[-1] not in ['ini', 'cfg', 'conf']:
+            print 'Error: configuration file must have a .ini, .cfg or .conf extension'
+            exit(0) 
+        print 'Generating the configuration file', args.generate_configuration, 'with current options.'
+        print 'You can now run: rst2reveal', args.generate_configuration
+        import ConfigParser
+        config = ConfigParser.RawConfigParser()
+        config.add_section('rst2reveal')
+        config.set('rst2reveal', 'input_file', filename)
+        config.set('rst2reveal', 'output_file', output_file)
+        config.set('rst2reveal', 'theme', theme)
+        config.set('rst2reveal', 'stylesheet', stylesheet)
+        config.set('rst2reveal', 'transition', transition)
+        config.set('rst2reveal', 'mathjax_path', mathjax_path)
+        config.set('rst2reveal', 'pygments_style', pygments_style)
+        config.set('rst2reveal', 'vertical_center', vertical_center)
+        config.set('rst2reveal', 'horizontal_center', horizontal_center)
+        config.set('rst2reveal', 'title_center', title_center)
+        config.set('rst2reveal', 'footer', footer)
+        config.set('rst2reveal', 'numbering', numbering)
+        config.set('rst2reveal', 'controls', controls)
+        config.add_section('firstslide')
+        config.set('firstslide', 'template', """
+    <h1>%(title)s</h1>
+    <h3>%(subtitle)s</h3>
+    <br>
+    <p><a href="mailto:%(email)s">%(author)s</a> %(is_institution)s %(institution)s</p>
+    <p><small>%(email)s</small></p>
+    <p>%(date)s</p>
+""")
+        config.add_section('footer')
+        config.set('footer', 'template', """
+    <b>%(title)s %(is_subtitle)s %(subtitle)s.</b> %(author)s%(is_institution)s %(institution)s. %(date)s""")
+        
 
-# Create the RST parser
-parser = rst2reveal.RSTParser(  input_file=input_file, 
+        # Writing our configuration file to args.generate_configuration
+        with open(args.generate_configuration, 'wb') as configfile:
+            config.write(configfile)
+            
+        exit(0)
+
+# Create the RST parser and create the slides
+parser = rst2reveal.RSTParser(  input_file=filename, 
+                                output_file=output_file,
                                 theme=theme, 
+                                stylesheet = stylesheet,
                                 transition=transition, 
                                 mathjax_path=mathjax_path,
-                                pygments_style=pygments_style)
-
-# Create the slides
-parser.create_slides(output_file=output_file)
-
+                                pygments_style=pygments_style,
+                                vertical_center=vertical_center,
+                                horizontal_center=horizontal_center,
+                                title_center=title_center,
+                                footer = footer,
+                                page_number = numbering,
+                                controls = controls,
+                                firstslide_template = firstslide_template,
+                                footer_template = footer_template )
+                                
+parser.create_slides()
 print 'The output is in', parser.output_file

@@ -1,8 +1,10 @@
-==============================
+==================================
 rst2reveal
-==============================
+==================================
 
-:subtitle: ReST to Reveal.js translator
+ReST to Reveal.js translator
+--------------------------------------
+
 :author: Julien Vitay
 :institution: TU Chemnitz
 :date: May 2013
@@ -20,6 +22,7 @@ Bullet lists
     * Also works with nested lists.
     
     * What happens if the line is really really long, does the bullet point go to far away? 
+
 
 With an additional paragraph...
 
@@ -43,14 +46,23 @@ What about math?
 
 Inline :math:`x(t)`
 
+Equation:
+
 .. math::
 
     \tau \frac{dx}{dt} + x = a
     
-Code?
+Also with ``align*`` mode:
+
+.. math::
+
+    a &= b +c \\
+    b &= a + 10
+    
+Code
 ===========
 
-In Python:
+The Pygments package can very easily highlight Python code using different patterns:
 
 .. code-block:: python
 
@@ -58,7 +70,7 @@ In Python:
     np.ones((10, 10))
     res = a + b
     
-In C++:
+This is true for a lot of languages, including C++:
 
 .. code-block:: c++
 
@@ -90,24 +102,27 @@ Images
 .. image:: drawing.svg
     :width: 100%
     :align: center
+
+Images
+==============
+
+.. image:: drawing.svg
+    :width: 50%
+    :align: center
     
-
-SVG too.
-
-
-
-    
+       
 Videos?
 ==============
 
 
 .. video:: matthews.webm
     :width: 50%
+    :align: center
     :autoplay:
-    
+
 * A video explaining the Active Appearance Model.
 
-* Matthews  
+* Matthews and Baker (2007)    
     
 Raw HTML
 ================
@@ -116,17 +131,32 @@ Raw HTML
 
     <b> Some text </b>
     
+::
+
+    .. raw:: html
+
+        <b> Some text </b>
+    
 Admonitions
 ==========================
     
-.. note::
+You can use admonitions, such as note:    
+    
+.. note:: 
 
-    This is a note    
+    This is a note   
+    
+Warning or caution   
+    
+.. caution::
+
+    This is a warning
+      
+    
+
     
 Are there subsections?
 ==========================
-
-Yes, go down!
 
 This one
 ++++++++++++++++
@@ -140,14 +170,14 @@ is another
 
 
 
-And you go back to the previous level
-=============================================
+And you go back to the previous level and look at very long titles
+========================================================================
 
 Citations are with the role ``epigraph``:
 
 .. epigraph::
 
-    L'important, c'est de bien s'ennuyer.
+    "L'important, c'est de bien s'ennuyer."
     
     -- Jean Carmet
     
@@ -159,9 +189,12 @@ Incremental reveal
     * First item
 
     * Second item
+
+
+    ::
     
-        * Nested too?
-        
-        * Let's see
-    
-    Some text
+        .. class:: fragment
+
+            * First item
+
+            * Second item
