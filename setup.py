@@ -31,14 +31,24 @@ except:
     print 'Checking for docutils... NO'
     print 'Error : Python package "docutils" is required.'
     print 'You can install it from: http://pypi.python.org/pypi/docutils'
-    exit(0)  
-   
+    exit(0) 
+
+# pygments
+try:
+    import pygments
+    print 'Checking for pygments... OK'
+except:
+    print 'Checking for pygments... NO'
+    print 'Warning : Python package "pygments" is not required but strongly advised to highlight code.'
+    print 'You can install it from: http://pypi.python.org/pypi/pygments'
+ 
+# Install the package   
 setup(  name='rst2reveal',
 		version='0.0.1',
-		license='GPLv2',
-		platforms='GNU/Linux, Windows',
-		description='ReST to Reveal.js convertor.',
-		long_description='ReST to Reveal.js convertor.',
+		license='MIT',
+		platforms='GNU/Linux',
+		description='ReST to Reveal.js translator.',
+		long_description='ReST to Reveal.js translator.',
 		author='Julien Vitay',
 		author_email='julien.vitay@informatik.tu-chemnitz.de',
 		url='http://www.tu-chemnitz.de/~vitay',
