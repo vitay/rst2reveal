@@ -18,6 +18,7 @@ from docutils.writers.html4css1 import HTMLTranslator, Writer
 # Import custom directives
 from PygmentsDirective import *
 from VideoDirective import *
+from PlotDirective import *
 
 class RevealWriter(Writer):
     """ Writer to be used with the RevealTranslator class."""

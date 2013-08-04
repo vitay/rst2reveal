@@ -66,63 +66,69 @@ The Pygments package can very easily highlight Python code using different patte
 .. code-block:: python
 
     import numpy as np
-    np.ones((10, 10))
+    
+    a = np.ones((10, 10))
+    
+    b = np.ones((10, 10))
+    
     res = a + b
     
 This is true for a lot of languages, including C++:
 
 .. code-block:: c++
 
-    void test(){
+    void test()
+    {
+    
         int i = 0;
-        for(int i=0; i<10; i++){
+    
+        for(i=0; i<10; i++)
+        {
             sleep(1);
         }
+    
         std::cout << "Hello, World!" << std::endl;
     }
+    
+There is a huge selection of themes you can use to highlight the code.
+ 
     
 Images
 ==============
 
-.. image:: amygdala.jpg
+.. image:: http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg
     :width: 50%
     :align: right
     
 
 * Images can be centered and scaled between 0 and 100%
 
-* Aligned to the left 
-
-* or to the right...
+* Aligned to the left or to the right...
 
 Images
 ==============
 
-.. image:: drawing.svg
-    :width: 100%
-    :align: center
-
-Images
-==============
-
-.. image:: drawing.svg
-    :width: 50%
+.. image:: http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg
+    :width: 90%
     :align: center
     
        
-Videos?
+Videos
 ==============
 
 
-.. video:: matthews.webm
-    :width: 50%
+.. video:: http://techslides.com/demos/sample-videos/small.ogv
+    :width: 70%
     :align: center
-    :autoplay:
 
-* A video explaining the Active Appearance Model.
+* Videos can displayed with the HTML5 video tag   
 
-* Matthews and Baker (2007)    
+::
     
+    .. video:: http://techslides.com/demos/sample-videos/small.ogv
+        :width: 70%
+        :align: center
+        
 Raw HTML
 ================
 
@@ -197,3 +203,60 @@ Incremental reveal
             * First item
 
             * Second item
+            
+Test svg
+============
+
+You can directly plot with matplotlib:
+
+.. matplotlib:: 
+    :align: center
+    :width: 80%
+    :revert:
+    
+    import numpy as np
+    ax = axes()
+
+    x = np.linspace(0, 10, 100)
+    ax.plot(x, np.sin(x) * np.exp(-0.1 * (x - 5) ** 2), 'b', lw=3, label='damped sine')
+    ax.plot(x, -np.cos(x) * np.exp(-0.1 * (x - 5) ** 2), 'r', lw=3, label='damped cosine')
+
+    ax.set_title('check it out!')
+    ax.set_xlabel('x label')
+    ax.set_ylabel('y label')
+
+    ax.legend(loc='lower right')
+
+    ax.set_xlim(0, 10)
+    ax.set_ylim(-1.0, 1.0)
+            
+Test svg
+============
+
+.. matplotlib:: 
+    :align: center
+    :revert:
+
+
+    import numpy as np
+    x = linspace(1, 100, 100)
+    y = x**2
+    z = np.sqrt(x)
+    ax = subplot(121)
+    ax.plot(x, y, linewidth=3)
+    ax = subplot(122)
+    ax.plot(x, z, linewidth=3)
+    
+ 
+    
+Images
+==============
+
+.. image:: http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg
+    :width: 50%
+    :align: right
+    
+
+* Images can be centered and scaled between 0 and 100%
+
+* Aligned to the left or to the right...
