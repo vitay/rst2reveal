@@ -170,7 +170,7 @@ else:
         else:
             print 'Error: transition', args.transition, 'does not exist. Using default transition.'
     else:
-        transition = 'default'
+        transition = 'linear'
     # pygments 
     if isPygments:
         if args.pygments_style:
@@ -222,7 +222,6 @@ else:
             print 'Error: configuration file must have a .ini, .cfg or .conf extension'
             exit(0) 
         print 'Generating the configuration file', args.generate_configuration, 'with current options.'
-        print 'You can now run: rst2reveal', args.generate_configuration
         import ConfigParser
         config = ConfigParser.RawConfigParser()
         config.add_section('rst2reveal')
@@ -257,6 +256,7 @@ else:
         with open(args.generate_configuration, 'wb') as configfile:
             config.write(configfile)
             
+        print 'You can now run: rst2reveal', args.generate_configuration
         exit(0)
 
 # Create the RST parser and create the slides

@@ -15,8 +15,12 @@ from docutils.utils.math import unichar2tex, pick_math_environment, math2html
 from docutils.utils.math.latex2mathml import parse_latex_math
 from docutils.writers.html4css1 import HTMLTranslator, Writer
 
-class RevealWriter(Writer):
+# Import custom directives
+from PygmentsDirective import *
+from VideoDirective import *
 
+class RevealWriter(Writer):
+    """ Writer to be used with the RevealTranslator class."""
 
     visitor_attributes = (
         'head_prefix', 'head', 'stylesheet', 'body_prefix',
@@ -27,6 +31,10 @@ class RevealWriter(Writer):
 
                     
 class RevealTranslator(HTMLTranslator):
+    """ Translator converting the reST items into HTML5 code usable by Reveal.js.
+    
+    Derived from docutils.writers.html4css1.HTMLTranslator.
+    """ 
 
     def __init__(self, document):
         HTMLTranslator.__init__(self, document) 
@@ -133,10 +141,13 @@ class RevealTranslator(HTMLTranslator):
         pass
 
     def visit_field_body(self, node):
-        name = re.findall(r'<field_name classes="docinfo-name">(.+)</field_name>', str(node.parent[0]))[0]
-        value = re.findall(r'<field_body>(.+)</field_body>', str(node.parent[1]))[0]
-        self.metadata.append(name + '=' + value + '\n')
-        
+        field_names = re.findall(r'<field_name>(.+)</field_name>', str(node.parent[0]))
+        field_values = re.findall(r'<field_body>(.+)</field_body>', str(node.parent[1]))
+        if len(field_names) > 0 and len(field_values) > 0:
+            name = field_names[0]
+            value = field_values[0]
+            self.metadata.append(name + '=' + value + '\n')
+            
     def depart_field_body(self, node):
         pass
         

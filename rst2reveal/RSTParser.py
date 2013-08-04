@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 try:
     import locale
     locale.setlocale(locale.LC_ALL, '')
@@ -12,10 +11,24 @@ from docutils.parsers.rst import Directive, directives
 from RevealTranslator import RevealTranslator, RevealWriter
 
 class RSTParser:
+    """Class converting a stand-alone reST file into a Reveal.js-powered HTML5 file, using the provided options."""
     
-    def __init__(self, input_file='index.rst', output_file='', theme='default', stylesheet='', transition = 'default', mathjax_path='', pygments_style='', vertical_center=False, horizontal_center=False, title_center=False, footer=True, page_number=True, controls=False, firstslide_template='', footer_template=''):
+    def __init__(self, input_file, output_file='', theme='default', transition = 'default', stylesheet='', 
+                 mathjax_path='', pygments_style='', vertical_center=False, 
+                 horizontal_center=False, title_center=False, footer=True, page_number=True, 
+                 controls=False, firstslide_template='', footer_template=''):
+        """ Constructor.
+        
+        Arguments:
+        
+            * input_file : name of the reST file to be processed (obligatory).
+            
+            * output_file: name of the HTML file to be generated (default: same as input_file, but with a .html extension).
+            
+            * theme: the name of the theme to be used (default: 'default'). 
+        """
     
-        # Input file
+        # Input/Output files
         self.input_file = input_file
         self.output_file = output_file
         
@@ -63,16 +76,25 @@ class RSTParser:
     def copy_reveal(self):
         curr_dir = os.path.dirname(os.path.realpath(self.output_file))
         cwd = os.getcwd()
+        # Copy the reveal subfolder
         if not os.path.isdir(curr_dir+'/reveal'):
             sources_dir = os.path.abspath(os.path.dirname(__file__)+'/reveal')
-            import shutil, tarfile
+            import shutil
             shutil.copytree(sources_dir, curr_dir+'/reveal')
-            os.chdir(curr_dir)
-            os.chdir(cwd)
+        # Generate the Pygments CSS file
+        self.is_pygments = False
         if not self.pygments_style == '':
+            # Check if Pygments is installed
+            try:
+                import pygments
+                self.is_pygments = True
+            except:
+                print 'Warning: Pygments is not installed, the code will not be highlighted.'
+                print 'You should install it with `pip install pygments`'
+                return
             os.chdir(curr_dir) 
             import subprocess, shutil
-            os.system("pygmentize -S "+self.pygments_style+" -f html -O bg=light> reveal/css/pygments.css")      
+            os.system("pygmentize -S "+self.pygments_style+" -f html -O bg=light > reveal/css/pygments.css")      
             # Fix the bug where the literal color goes to math blocks...
             with open('reveal/css/pygments.css', 'r') as infile:
                 with open('reveal/css/pygments.css.tmp', 'w') as outfile:
@@ -134,40 +156,35 @@ class RSTParser:
                 content=t.replace(name+'=', '')
                 content=clean(content)
                 self.meta_info[name]= content
-                
-        
-        if self.parts['subtitle'] != '': # defined with a underlined text instead of :subtitle:
-            self.meta_info['subtitle'] = self.parts['subtitle']
             
         self.generate_titleslide()
         
     def generate_titleslide(self):
+    
+        if self.parts['title'] != '': # A title has been given
+            self.meta_info['title'] = self.parts['title']
+        elif not 'title' in self.meta_info.keys():
+            self.meta_info['title'] = '' 
         
+        if self.parts['subtitle'] != '': # defined with a underlined text instead of :subtitle:
+            self.meta_info['subtitle'] = self.parts['subtitle']
+        elif not 'subtitle' in self.meta_info.keys():
+            self.meta_info['subtitle'] = ''    
         
-        if 'subtitle' in self.meta_info.keys():
-            self.subtitle = self.meta_info['subtitle']
-        else:
-            self.subtitle=''    
+        if not 'email' in self.meta_info.keys():
+            self.meta_info['email'] = ''
+            
+        if not 'institution' in self.meta_info.keys():
+            self.meta_info['institution'] = ''
+            
+        if not 'date' in self.meta_info.keys():
+            self.meta_info['date'] = ''  
         
-        if 'email' in self.meta_info.keys():
-            self.email= self.meta_info['email']
-        else:
-            self.email=''
+        # Separators
+        self.meta_info['is_institution'] = '-' if self.meta_info['institution'] != '' else ''
+        self.meta_info['is_author'] = '.' if self.meta_info['author'] != '' else ''
+        self.meta_info['is_subtitle'] = '.' if self.meta_info['subtitle'] != '' else ''
             
-        if 'institution' in self.meta_info.keys():
-            self.institution= self.meta_info['institution']
-        else:
-            self.institution=''
-            
-        if 'author' in self.meta_info.keys():
-            self.author = self.meta_info['author']
-        else:
-            self.author='' 
-            
-        if 'date' in self.meta_info.keys():
-            self.date = self.meta_info['date'] 
-        else:
-            self.date=''  
             
         if self.firstslide_template == "":
              self.firstslide_template = """
@@ -180,28 +197,14 @@ class RSTParser:
 """ 
          
         self.titleslide="""
-<section class="titleslide">""" + self.firstslide_template % {  'title' : self.title,
-        'subtitle' : self.subtitle,
-        'author' : self.author,
-        'is_institution' : '-' if self.institution is not '' else '',
-        'institution' : self.institution,
-        'email' : self.email ,
-        'date' : self.date } + """
+<section class="titleslide">""" + self.firstslide_template % self.meta_info + """
 </section>
 """
         if self.footer_template=="":
             self.footer_template = """<b>%(title)s %(is_subtitle)s %(subtitle)s.</b> %(author)s%(is_institution)s %(institution)s. %(date)s"""
         
         if self.write_footer:
-            self.footer_html = """<footer id=\"footer\">""" + self.footer_template % {'title' : self.title,
-            'is_subtitle' : '-' if self.subtitle is not '' else '',
-            'subtitle' : self.subtitle,
-            'is_author' : '.' if self.author is not '' else '',
-            'author' : self.author,
-            'is_institution' : ' - ' if self.institution is not '' else '',
-            'institution' : self.institution,
-            'email' : self.email ,
-            'date' : self.date } +  """<b id=\"slide_number\" style=\"padding: 1em;\"></b></footer>"""
+            self.footer_html = """<footer id=\"footer\">""" + self.footer_template % self.meta_info +  """<b id=\"slide_number\" style=\"padding: 1em;\"></b></footer>"""
         elif self.page_number:
             self.footer_html =  """<footer><b id=\"slide_number\"></b></footer>"""
         else:
@@ -222,7 +225,7 @@ class RSTParser:
 		        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
 		        <link rel="stylesheet" href="reveal/css/reveal.min.css">
-		        <link rel="stylesheet" href="reveal/css/pygments.css">
+		        %(pygments)s
 		        <link rel="stylesheet" href="reveal/css/rst2reveal.css">
 		        <link rel="stylesheet" href="reveal/css/theme/default.css" id="theme">
 		        <link rel="stylesheet" href="reveal/css/theme/%(theme)s.css" id="theme">
@@ -245,6 +248,7 @@ class RSTParser:
         """%{'title': self.title,
              'meta' : self.parts['meta'],
              'theme': self.theme,
+             'pygments': '<link rel="stylesheet" href="reveal/css/pygments.css">' if self.is_pygments else '',
              'mathjax_path': self.mathjax_path,
              'horizontal_center': 'center' if self.horizontal_center else 'left',
              'title_center': 'center' if self.title_center else 'left',
@@ -314,6 +318,6 @@ class RSTParser:
 					        
 if __name__ == '__main__':
     # Create the object
-    parser = RSTParser()
+    parser = RSTParser(input_file='index.rst')
     # Create the slides
     parser.create_slides()

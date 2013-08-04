@@ -6,9 +6,8 @@ ReST to Reveal.js translator
 --------------------------------------
 
 :author: Julien Vitay
-:institution: TU Chemnitz
-:date: May 2013
-:email: julien.vitay@informatik.tu-chemnitz.de
+:date: August 2013
+:email: julien.vitay@gmail.com
 
 
 
