@@ -40,7 +40,7 @@ def plot_directive(name, arguments, options, content, lineno,
     except:
         print 'Error: alpha must be a floating value between 0.0 and 1.0'
         return []
-    if 'revert' in options.keys():
+    if 'invert' in options.keys():
         import matplotlib
         matplotlib.rcParams['figure.facecolor'] = 'b'
         matplotlib.rcParams['figure.edgecolor'] = 'b'
@@ -50,7 +50,7 @@ def plot_directive(name, arguments, options, content, lineno,
         matplotlib.rcParams['xtick.color'] = 'w'
         matplotlib.rcParams['ytick.color'] = 'w'
         matplotlib.rcParams['legend.frameon'] = False
-        if not 'alpha' in options.keys(): # not spcfied, so default = 0.0
+        if not 'alpha' in options.keys(): # not specified, so default = 0.0
             alpha = 0.0
     
     
@@ -88,6 +88,6 @@ def plot_directive(name, arguments, options, content, lineno,
 
 plot_directive.content = 1
 plot_directive.arguments = (0, 0, 0)
-plot_directive.options = {'align': directives.unchanged, 'width': directives.unchanged, 'alpha': directives.unchanged, 'revert': directives.unchanged}
+plot_directive.options = {'align': directives.unchanged, 'width': directives.unchanged, 'alpha': directives.unchanged, 'invert': directives.unchanged}
 
 directives.register_directive('matplotlib', plot_directive)

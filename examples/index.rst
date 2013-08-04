@@ -212,7 +212,7 @@ You can directly plot with matplotlib:
 .. matplotlib:: 
     :align: center
     :width: 80%
-    :revert:
+    :invert:
     
     import numpy as np
     ax = axes()
@@ -235,7 +235,7 @@ Test svg
 
 .. matplotlib:: 
     :align: center
-    :revert:
+    :invert:
 
 
     import numpy as np
