@@ -6,9 +6,14 @@ except:
 
 import os, sys
 import docutils.core
-from docutils.parsers.rst import Directive, directives
 
-from RevealTranslator import RevealTranslator, RevealWriter
+from RevealTranslator import RST2RevealTranslator, RST2RevealWriter
+
+# Import custom directives
+from TwoColumnsDirective import *
+from PygmentsDirective import *
+from VideoDirective import *
+from PlotDirective import *
 
 class RSTParser:
     """Class converting a stand-alone reST file into a Reveal.js-powered HTML5 file, using the provided options."""
@@ -65,8 +70,8 @@ class RSTParser:
         self.copy_reveal()
         
         # Create the writer and retrieve the parts
-        self.html_writer = RevealWriter()
-        self.html_writer.translator_class = RevealTranslator
+        self.html_writer = RST2RevealWriter()
+        self.html_writer.translator_class = RST2RevealTranslator
         with open(self.input_file, 'r') as infile:
             self.parts = docutils.core.publish_parts(source=infile.read(), writer=self.html_writer)
 

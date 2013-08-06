@@ -212,20 +212,20 @@ You can directly plot with matplotlib:
 .. matplotlib:: 
     :align: center
     :width: 80%
-    :invert:
+    :xkcdify:
     
     import numpy as np
     ax = axes()
 
     x = np.linspace(0, 10, 100)
-    ax.plot(x, np.sin(x) * np.exp(-0.1 * (x - 5) ** 2), 'b', lw=3, label='damped sine')
-    ax.plot(x, -np.cos(x) * np.exp(-0.1 * (x - 5) ** 2), 'r', lw=3, label='damped cosine')
+    ax.plot(x, np.sin(x) * np.exp(-0.1 * (x - 5) ** 2), 'b', lw=1, label='damped sine')
+    ax.plot(x, -np.cos(x) * np.exp(-0.1 * (x - 5) ** 2), 'r', lw=1, label='damped cosine')
 
     ax.set_title('check it out!')
     ax.set_xlabel('x label')
     ax.set_ylabel('y label')
 
-    ax.legend(loc='lower right')
+    ax.legend(loc='upper right')
 
     ax.set_xlim(0, 10)
     ax.set_ylim(-1.0, 1.0)
@@ -235,28 +235,40 @@ Test svg
 
 .. matplotlib:: 
     :align: center
-    :invert:
+    :xkcdify:
 
 
     import numpy as np
-    x = linspace(1, 100, 100)
+    x = linspace(0., 1., 50)
     y = x**2
     z = np.sqrt(x)
-    ax = subplot(121)
-    ax.plot(x, y, linewidth=3)
-    ax = subplot(122)
-    ax.plot(x, z, linewidth=3)
+    ax = axes()
+    ax.set_xlabel('x value')
+    ax.set_ylabel('y value')
+    ax.set_title('Quadratic vs Squared root')
+    ax.plot(x, x, 'k', linewidth=1, label='Linear')
+    ax.plot(x, y, 'b', linewidth=1, label='Quadratic')
+    ax.plot(x, z, 'r', linewidth=1, label='Squared root')
+    ax.legend(loc='lower right')
     
  
-    
-Images
+Two columns
 ==============
-
-.. image:: http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg
-    :width: 50%
-    :align: right
     
 
-* Images can be centered and scaled between 0 and 100%
 
-* Aligned to the left or to the right...
+.. left-column::
+
+    .. video:: http://techslides.com/demos/sample-videos/small.ogv
+        :width: 100%
+        :align: center
+        
+.. right-column::
+
+    
+    .. class:: fragment
+
+        * Something in the left column 
+        
+        * Blabla youyou
+

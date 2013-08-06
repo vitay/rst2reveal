@@ -18,6 +18,7 @@
 .reveal h5,
 .reveal h6 {
     text-transform: none;
+    color: #555;
 }
                 
 .reveal h1 {

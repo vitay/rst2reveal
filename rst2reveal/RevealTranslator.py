@@ -1,26 +1,15 @@
 __docformat__ = 'reStructuredText'
 
-import sys
 import os
-import os.path
-import time
 import re
-import urllib
-import PIL.Image
+
 import docutils
-from docutils import frontend, nodes, utils, writers, languages, io
-from docutils.utils.error_reporting import SafeString
-from docutils.transforms import writer_aux
-from docutils.utils.math import unichar2tex, pick_math_environment, math2html
-from docutils.utils.math.latex2mathml import parse_latex_math
+from docutils import nodes
 from docutils.writers.html4css1 import HTMLTranslator, Writer
 
-# Import custom directives
-from PygmentsDirective import *
-from VideoDirective import *
-from PlotDirective import *
 
-class RevealWriter(Writer):
+
+class RST2RevealWriter(Writer):
     """ Writer to be used with the RevealTranslator class."""
 
     visitor_attributes = (
@@ -31,7 +20,7 @@ class RevealWriter(Writer):
         'html_body', 'metadata')
 
                     
-class RevealTranslator(HTMLTranslator):
+class RST2RevealTranslator(HTMLTranslator):
     """ Translator converting the reST items into HTML5 code usable by Reveal.js.
     
     Derived from docutils.writers.html4css1.HTMLTranslator.
@@ -299,3 +288,5 @@ class RevealTranslator(HTMLTranslator):
 
     def depart_list_item(self, node):
         self.body.append('</li>\n')
+                
+

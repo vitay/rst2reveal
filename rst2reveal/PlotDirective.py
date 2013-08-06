@@ -54,15 +54,30 @@ def plot_directive(name, arguments, options, content, lineno,
             alpha = 0.0
     
     
-    # Execute the code... RISKY!
+    # Execute the code line by line
     try:
         fig = figure()
         for line in content:
             exec(line)
+        # Set transparency
         fig.patch.set_alpha(alpha)
         for ax in fig.axes:
             ax.patch.set_alpha(alpha)
+        # Call XKCDify
+        if 'xkcdify' in options.keys():
+            from XKCDify import XKCDify
+            for ax in fig.axes:
+                XKCDify(ax, mag=1.5, bgcolor = 'k' if 'invert' in options.keys() else 'w',
+                        forecolor = 'w' if 'invert' in options.keys() else 'k',
+                        xaxis_arrow='+', yaxis_arrow='+',
+                        ax_extend= 0.05,
+                        expand_axes=(len(fig.axes) == 1))
+        # Save the figure in a temporary SVG file
         fig.savefig('__temp.svg', dpi=600, edgecolor='w')
+        # Optionally save the figure
+        if 'save' in options.keys():
+            fig.savefig(options['save'], dpi=600)
+        
     except Exception, e:
         print 'Error while generating the figure:'
         for line in content:
@@ -88,6 +103,6 @@ def plot_directive(name, arguments, options, content, lineno,
 
 plot_directive.content = 1
 plot_directive.arguments = (0, 0, 0)
-plot_directive.options = {'align': directives.unchanged, 'width': directives.unchanged, 'alpha': directives.unchanged, 'invert': directives.unchanged}
+plot_directive.options = {'align': directives.unchanged, 'width': directives.unchanged, 'alpha': directives.unchanged, 'invert': directives.unchanged, 'xkcdify': directives.unchanged, 'save': directives.unchanged}
 
 directives.register_directive('matplotlib', plot_directive)
