@@ -41,6 +41,15 @@ except:
     print 'Checking for pygments... NO'
     print 'Warning : Python package "pygments" is not required but strongly advised to highlight code.'
     print 'You can install it from: http://pypi.python.org/pypi/pygments'
+
+# matplotlib
+try:
+    import matplotlib
+    print 'Checking for matplotlib... OK'
+except:
+    print 'Checking for matplotlib... NO'
+    print 'Warning : Python package "matplotlin" is not required but strongly advised to plot figures.'
+    print 'You can install it from: http://pypi.python.org/pypi/matplotlib'
  
 # Install the package   
 setup(  name='rst2reveal',
@@ -50,10 +59,10 @@ setup(  name='rst2reveal',
 		description='ReST to Reveal.js translator.',
 		long_description='ReST to Reveal.js translator.',
 		author='Julien Vitay',
-		author_email='julien.vitay@informatik.tu-chemnitz.de',
-		url='http://www.tu-chemnitz.de/~vitay',
+		author_email='julien.vitay@gmail.com',
+		url='https://bitbucket.org/vitay/rst2reveal',
         packages=find_packages(),
-        package_data={'reveal': ['*.css', '*.js', '*.eot', '*.svg', '*.woff', '*.py', '*.md', '*.html']},
+        package_data={'reveal': ['*.css', '*.js', '*.py']},
         include_package_data=True,
         scripts = ['scripts/rst2reveal']
  )
