@@ -1,5 +1,4 @@
-from RSTParser import RSTParser
+from Parser import Parser
 
 __version__ = '0.1'
 
-print """rst2reveal: ReST to Reveal.js HTML5 slide generator."""

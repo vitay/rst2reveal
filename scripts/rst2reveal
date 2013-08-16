@@ -3,6 +3,8 @@ import os, sys
 import argparse
 import rst2reveal 
 
+print """rst2reveal: ReST to Reveal.js HTML5 slide generator."""
+
 # Test the presence of Pygments
 isPygments=False
 try:
@@ -260,7 +262,7 @@ else:
         exit(0)
 
 # Create the RST parser and create the slides
-parser = rst2reveal.RSTParser(  input_file=filename, 
+parser = rst2reveal.Parser(     input_file=filename, 
                                 output_file=output_file,
                                 theme=theme, 
                                 stylesheet = stylesheet,

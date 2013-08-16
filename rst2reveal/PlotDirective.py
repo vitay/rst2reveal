@@ -30,7 +30,7 @@ def plot_directive(name, arguments, options, content, lineno,
     if 'alpha' in options.keys():
         alpha = options['alpha']
     else:
-        alpha = '1.0'
+        alpha = '0.0'
     try:
         alpha = float(alpha)
         if alpha <0.0:
@@ -63,11 +63,23 @@ def plot_directive(name, arguments, options, content, lineno,
         fig.patch.set_alpha(alpha)
         for ax in fig.axes:
             ax.patch.set_alpha(alpha)
+#            if ax.get_legend() is not None:
+#                for child in ax.get_legend().get_children():
+#                    child.set_alpha(alpha)
         # Call XKCDify
-        if 'xkcdify' in options.keys():
+        if 'xkcd' in options.keys():
+            if options['xkcd'] != '':
+                try:
+                    mag = float(options['xkcd'])
+                except:
+                    print 'Error: the argument to :xkcd: must be a float.'
+                    return []
+            else:
+                mag=1.5
             from XKCDify import XKCDify
             for ax in fig.axes:
-                XKCDify(ax, mag=1.5, bgcolor = 'k' if 'invert' in options.keys() else 'w',
+                XKCDify(ax, mag=mag, 
+                        bgcolor = 'k' if 'invert' in options.keys() else 'w',
                         forecolor = 'w' if 'invert' in options.keys() else 'k',
                         xaxis_arrow='+', yaxis_arrow='+',
                         ax_extend= 0.05,
@@ -89,13 +101,16 @@ def plot_directive(name, arguments, options, content, lineno,
     # Extract the generated data
     start = False
     text = "<div class=\"align-%(align)s\">\n" % {'align': align}
-    with open('__temp.svg', 'r') as infile:
+    with open('__temp.svg', 'rb') as infile:
         for aline in infile:
             if aline.find('<svg ') != -1:
                 start = True
                 text += '   <svg class=\"align-%(align)s\" %(width)s viewBox="0 0 576 432" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg >"\n' % {'align': align, 'width': width}
             elif start:
-                text += '   ' + aline 
+                try:
+                    text += '   ' + unicode(aline) 
+                except: 
+                    pass
     text += "\n</div>\n"
     os.system('rm -f __temp.svg')
         
@@ -103,6 +118,6 @@ def plot_directive(name, arguments, options, content, lineno,
 
 plot_directive.content = 1
 plot_directive.arguments = (0, 0, 0)
-plot_directive.options = {'align': directives.unchanged, 'width': directives.unchanged, 'alpha': directives.unchanged, 'invert': directives.unchanged, 'xkcdify': directives.unchanged, 'save': directives.unchanged}
+plot_directive.options = {'align': directives.unchanged, 'width': directives.unchanged, 'alpha': directives.unchanged, 'invert': directives.unchanged, 'xkcd': directives.unchanged, 'save': directives.unchanged}
 
 directives.register_directive('matplotlib', plot_directive)

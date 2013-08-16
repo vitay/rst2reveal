@@ -289,4 +289,10 @@ class RST2RevealTranslator(HTMLTranslator):
     def depart_list_item(self, node):
         self.body.append('</li>\n')
                 
+                
+    def visit_sidebar(self, node):
+        if 'classes' in node:
+            if node['classes'][0] in ['left', 'right']:
+                self.inline_lists = True
+        HTMLTranslator.visit_sidebar(self, node)
 
