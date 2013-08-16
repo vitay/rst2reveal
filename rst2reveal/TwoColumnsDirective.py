@@ -23,16 +23,16 @@ class LeftColumnNode(nodes.Part, nodes.Element): pass
 class RightColumnNode(nodes.Part, nodes.Element): pass 
 
 def visit_left_column(self, node):
-    self.body.append('<div class="columns"><div class="left">\n')
+    self.body.append(' '*12 + '<div class="columns"><div class="left">\n')
 
 def depart_left_column(self, node):
-    self.body.append('</div>\n')
+    self.body.append(' '*12 + '</div>\n')
             
 def visit_right_column(self, node):
-    self.body.append('<div class="right">\n')
+    self.body.append(' '*12 + '<div class="right">\n')
 
 def depart_right_column(self, node):
-    self.body.append('</div></div>\n')
+    self.body.append(' '*12 + '</div></div>\n')
 
 def add_node(node, **kwds):
     nodes._add_node_class_names([node.__name__])

@@ -49,27 +49,27 @@ class RST2RevealTranslator(HTMLTranslator):
     def visit_title(self, node):
         """Only 6 section levels are supported by HTML."""
         check_id = 0  # TODO: is this a bool (False) or a counter?
-        close_tag = '</p>\n'
+        close_tag = ' '*12 + '</p>\n'
         if isinstance(node.parent, nodes.topic):
-            self.body.append(
+            self.body.append(' '*12 + 
                   self.starttag(node, 'p', '', CLASS='topic-title first'))
         elif isinstance(node.parent, nodes.sidebar):
-            self.body.append(
+            self.body.append(' '*12 + 
                   self.starttag(node, 'p', '', CLASS='sidebar-title'))
         elif isinstance(node.parent, nodes.Admonition):
-            self.body.append(
+            self.body.append(' '*12 + 
                   self.starttag(node, 'p', '', CLASS='admonition-title'))
         elif isinstance(node.parent, nodes.table):
-            self.body.append(
+            self.body.append(' '*12 + 
                   self.starttag(node, 'caption', ''))
-            close_tag = '</caption>\n'
+            close_tag = ' '*12 + '</caption>\n'
         elif isinstance(node.parent, nodes.document):
-            self.body.append(self.starttag(node, 'h2'))
+            self.body.append(' '*8 + self.starttag(node, 'h2'))
             close_tag = '</h2>\n'
             self.in_document_title = len(self.body)
         else:
             assert isinstance(node.parent, nodes.section)
-            self.body.append(self.starttag(node, 'h2', ''))
+            self.body.append(' '*8 + self.starttag(node, 'h2', ''))
             close_tag = '</h2>\n'
         self.context.append(close_tag)
 
@@ -88,14 +88,14 @@ class RST2RevealTranslator(HTMLTranslator):
         if not self.section_level == 2:
             self.body.append('<section>\n')
         else:
-            self.body.append('</section>\n')
-        self.body.append('<section>\n')
+            self.body.append('    </section>\n')
+        self.body.append('    <section>\n')
 
     def depart_section(self, node):
         self.section_level -= 1
         if not self.section_level == 1:
             self.subsection_previous =False
-            self.body.append('</section>\n')
+            self.body.append('    </section>\n')
         else:
             self.subsection_previous =True
         if not self.subsection_previous:
@@ -143,11 +143,11 @@ class RST2RevealTranslator(HTMLTranslator):
         
     def visit_block_quote(self, node):
         if not isinstance(node.parent, nodes.list_item):
-            self.body.append(self.starttag(node, 'blockquote'))
+            self.body.append(' '*12 + self.starttag(node, 'blockquote'))
 
     def depart_block_quote(self, node):
         if not isinstance(node.parent, nodes.list_item):
-            self.body.append('</blockquote>\n')
+            self.body.append(' '*12 + '</blockquote>\n')
         
 
     def visit_image(self, node):
@@ -220,9 +220,9 @@ class RST2RevealTranslator(HTMLTranslator):
             self.body.append(self.starttag(node, 'object', suffix, **atts) +
                              node.get('alt', uri) + '</object>' + suffix)
         else:
-            self.body.append('<div class=\"'+align+'\">\n')
-            self.body.append(self.emptytag(node, 'img', suffix, **atts))
-            self.body.append('</div>\n')
+            self.body.append(' '*12 + '<div class=\"'+align+'\">\n')
+            self.body.append(' '*12 + self.emptytag(node, 'img', suffix, **atts))
+            self.body.append(' '*12 + '</div>\n')
 
     def depart_image(self, node):
         self.body.append(self.context.pop())
@@ -242,13 +242,13 @@ class RST2RevealTranslator(HTMLTranslator):
         if self.compact_simple and not old_compact_simple:
             atts['class'] = 'simple'
         if self.inline_lists: # the list  should wrap an image
-            self.body.append('<ul style="display: inline;">')
+            self.body.append(' '*12 + '<ul style="display: inline;">')
         else:
-            self.body.append(self.starttag(node, 'ul', **atts))
+            self.body.append(' '*12 + self.starttag(node, 'ul', **atts))
 
     def depart_bullet_list(self, node):
         self.compact_simple, self.compact_p = self.context.pop()
-        self.body.append('</ul>\n')
+        self.body.append(' '*12 + '</ul>\n')
         
     def visit_enumerated_list(self, node):
         """
@@ -272,17 +272,17 @@ class RST2RevealTranslator(HTMLTranslator):
             node['classes'].append('fragmented_list')
         if self.compact_simple and not old_compact_simple:
             atts['class'] = (atts.get('class', '') + ' simple').strip()
-        self.body.append(self.starttag(node, 'ol', **atts))
+        self.body.append(' '*12 + self.starttag(node, 'ol', **atts))
 
     def depart_enumerated_list(self, node):
         self.compact_simple, self.compact_p = self.context.pop()
-        self.body.append('</ol>\n')
+        self.body.append(' '*12 + '</ol>\n')
                 
     def visit_list_item(self, node):
         if 'fragmented_list' in node.parent['classes']:
-            self.body.append(self.starttag(node, 'li', '', CLASS='fragment'))
+            self.body.append(' '*16 + self.starttag(node, 'li', '', CLASS='fragment'))
         else:
-            self.body.append(self.starttag(node, 'li', ''))
+            self.body.append(' '*16 + self.starttag(node, 'li', ''))
         if len(node):
             node[0]['classes'].append('first')
 

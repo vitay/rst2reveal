@@ -2,12 +2,12 @@ from docutils import nodes
 from docutils.parsers.rst import directives
 
 VIDEO_CODE = """\
-    <div class="align-%(align)s">
-    <video style="text-align:%(align)s; float:%(align)s" width="%(width)s" %(autoplay)s %(loop)s %(controls)s>
-      <source src="%(filename)s" type="video/%(codec)s">
-      Your browser does not support the video tag.
-    </video>
-    </div>
+            <div class="align-%(align)s">
+                <video style="text-align:%(align)s; float:%(align)s" width="%(width)s" %(autoplay)s %(loop)s %(controls)s>
+                      <source src="%(filename)s" type="video/%(codec)s">
+                      Your browser does not support the video tag.
+                </video>
+            </div>
 """
 
 

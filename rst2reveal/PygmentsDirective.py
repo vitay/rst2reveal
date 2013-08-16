@@ -28,7 +28,7 @@ def pygments_directive(name, arguments, options, content, lineno,
     # take an arbitrary option if more than one is given
     formatter = options and VARIANTS[options.keys()[0]] or DEFAULT
     parsed = highlight(u'\n'.join(content), lexer, formatter)
-    parsed = '<code>%s</code>' % parsed
+    parsed = ' '*12 + '<code>%s</code>' % parsed
     return [nodes.raw('', parsed, format='html')]
 
 pygments_directive.arguments = (1, 0, 1)

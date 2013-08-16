@@ -46,72 +46,72 @@
 </section>
 
 <section>
-<section>
-<h2>ReST to Reveal.js translator</h2>
-<ul class="simple">
-<li><strong>rst2reveal</strong> is intended to transform regular reStructuredText (ReST) text files to HTML5 slides using some features of the <a class="reference external" href="http://revealjs.com/">Reveal.js</a> Javascript library developped by <a class="reference external" href="http://hakim.se">Hakim El Hattab</a>.</li>
-<li>It aims at providing a quick and easy way to produce nice and consistent HTML slides for teaching or scientific use, not fancy presentations.</li>
-<li><strong>Reveal.js</strong> has more features than what <strong>rst2reveal</strong> can produce, so if you are more fluent in HTML than ReST, you should use it directly.</li>
-<li><strong>rst2reveal</strong> ships some parts of Reveal.js (mainly <tt class="docutils literal">.js</tt> and <tt class="docutils literal">.css</tt> files), so it is released under the same MIT license.</li>
-</ul>
-</section>
-</section>
-
-<section>
-<section>
-<h2>Basic ReST markup</h2>
-</section>
+    <section>
+        <h2>ReST to Reveal.js translator</h2>
+            <ul class="simple">
+                <li><strong>rst2reveal</strong> is intended to transform regular reStructuredText (ReST) text files to HTML5 slides using some features of the <a class="reference external" href="http://revealjs.com/">Reveal.js</a> Javascript library developped by <a class="reference external" href="http://hakim.se">Hakim El Hattab</a>.</li>
+                <li>It aims at providing a quick and easy way to produce nice and consistent HTML slides for teaching or scientific use, not fancy presentations.</li>
+                <li><strong>Reveal.js</strong> has more features than what <strong>rst2reveal</strong> can produce, so if you are more fluent in HTML than ReST, you should use it directly.</li>
+                <li><strong>rst2reveal</strong> ships some parts of Reveal.js (mainly <tt class="docutils literal">.js</tt> and <tt class="docutils literal">.css</tt> files), so it is released under the same MIT license.</li>
+            </ul>
+    </section>
 </section>
 
 <section>
+    <section>
+        <h2>Basic ReST markup</h2>
+    </section>
+</section>
+
 <section>
-<h2>Basic ReST markup</h2>
+    <section>
+        <h2>Basic ReST markup</h2>
 <p><strong>rst2reveal</strong> processes the usual ReST inline markup:</p>
-<ul>
-<li><p class="first"><strong>Bold</strong> : <tt class="docutils literal">**Bold**</tt></p>
+            <ul>
+                <li><p class="first"><strong>Bold</strong> : <tt class="docutils literal">**Bold**</tt></p>
 </li>
-<li><p class="first"><em>Italic</em> : <tt class="docutils literal">*Italic*</tt></p>
+                <li><p class="first"><em>Italic</em> : <tt class="docutils literal">*Italic*</tt></p>
 </li>
-<li><p class="first"><tt class="docutils literal">Literals</tt> : <tt class="docutils literal">``Literals``</tt></p>
+                <li><p class="first"><tt class="docutils literal">Literals</tt> : <tt class="docutils literal">``Literals``</tt></p>
 </li>
-<li><p class="first">Subscripts H<sub>2</sub>O and supscripts E = mc<sup>2</sup> :</p>
+                <li><p class="first">Subscripts H<sub>2</sub>O and supscripts E = mc<sup>2</sup> :</p>
 <p><tt class="docutils literal">H\ <span class="pre">:sub:`2`\</span> O and E = mc\ <span class="pre">:sup:`2`</span></tt></p>
 </li>
-<li><p class="first"><a class="reference external" href="http://www.example.com">Links</a> : <tt class="docutils literal">`Links <span class="pre">&lt;http://www.example.com&gt;`_</span></tt></p>
+                <li><p class="first"><a class="reference external" href="http://www.example.com">Links</a> : <tt class="docutils literal">`Links <span class="pre">&lt;http://www.example.com&gt;`_</span></tt></p>
 </li>
-</ul>
-</section>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Lists</h2>
+    <section>
+        <h2>Lists</h2>
 <p><strong>Bulleted lists</strong></p>
-<ul class="simple">
-<li>This is a bulleted list.</li>
-<li>It has two items, the second
+            <ul class="simple">
+                <li>This is a bulleted list.</li>
+                <li>It has two items, the second
 item uses two lines.</li>
-</ul>
+            </ul>
 <pre class="literal-block">
 * This is a bulleted list.
 * It has two items, the second
   item uses two lines.
 </pre>
 <p><strong>Enumerated lists</strong></p>
-<ol class="arabic simple">
-<li>This is a numbered list.</li>
-<li>It has two items too.</li>
-</ol>
+            <ol class="arabic simple">
+                <li>This is a numbered list.</li>
+                <li>It has two items too.</li>
+            </ol>
 <pre class="literal-block">
 1. This is a numbered list.
 2. It has two items too.
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Structure of a ReST document</h2>
+    <section>
+        <h2>Structure of a ReST document</h2>
 <p>The input file should have a hierarchical structure, with the different sections underlined (optionally also overlined) by special characters:</p>
 <pre class="literal-block">
 #########################
@@ -138,44 +138,44 @@ Title of the second slide
 
 * ... second slide
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Structure of a ReST document</h2>
+    <section>
+        <h2>Structure of a ReST document</h2>
 <p>The choice of the marker characters is free. The line must be at least as long as the text.</p>
-<ul>
-<li><p class="first">The first level header defines the title of the presentation:</p>
+            <ul>
+                <li><p class="first">The first level header defines the title of the presentation:</p>
 <pre class="literal-block">
 #########################
 Title of the presentation
 #########################
 </pre>
 </li>
-<li><p class="first">The second level (if any) defines the subtitle of the presentation:</p>
+                <li><p class="first">The second level (if any) defines the subtitle of the presentation:</p>
 <pre class="literal-block">
 Subtitle
 ++++++++
 </pre>
 </li>
-<li><p class="first">The third level defines the title of each slide:</p>
+                <li><p class="first">The third level defines the title of each slide:</p>
 <pre class="literal-block">
 Title of the first slide
 ========================
 </pre>
 </li>
-</ul>
-</section>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Subslides</h2>
-<ul>
-<li><p class="first">Optionally, fourth-level headers define subslides in Reveal.js</p>
+    <section>
+        <h2>Subslides</h2>
+            <ul>
+                <li><p class="first">Optionally, fourth-level headers define subslides in Reveal.js</p>
 </li>
-<li><p class="first">They are accessed by pressing the up and down keys, as opposed as the left/right keys for normal slides:</p>
+                <li><p class="first">They are accessed by pressing the up and down keys, as opposed as the left/right keys for normal slides:</p>
 <pre class="literal-block">
 First subslide
 --------------
@@ -188,23 +188,23 @@ Second subslide
 Content of the second subslide.
 </pre>
 </li>
-<li><p class="first">It is useful for a finer structuring of your presentation, or when planning additional slides if the audience has questions (instead of dumping them at the end).</p>
+                <li><p class="first">It is useful for a finer structuring of your presentation, or when planning additional slides if the audience has questions (instead of dumping them at the end).</p>
 </li>
-</ul>
-</section>
-<section>
-<h2>First subslide</h2>
+            </ul>
+    </section>
+    <section>
+        <h2>First subslide</h2>
 <p>Content of the first subslide.</p>
-</section>
-<section>
-<h2>Second subslide</h2>
+    </section>
+    <section>
+        <h2>Second subslide</h2>
 <p>Content of the second subslide.</p>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Field lists</h2>
+    <section>
+        <h2>Field lists</h2>
 <p>It is possible to define <em>field lists</em> at the beginning of the document to generate the metadata used for the generation of the first slide and of the footer:</p>
 <pre class="literal-block">
 #########################
@@ -220,65 +220,65 @@ Subtitle
 :email: me&#64;example.com
 </pre>
 <p>It is possible to add other fields than these four, but the template for the first slide will need to be adapted.</p>
-</section>
-</section>
-
-<section>
-<section>
-<h2>Directives processed by rst2reveal</h2>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Directives processed by rst2reveal</h2>
-<ul>
-<li><p class="first">For a richer content than these basic markups, you'll need to use the docutils <strong>directives</strong>.</p>
-</li>
-<li><p class="first">Some of the standard directives are processed by rst2reveal:</p>
-<ul class="simple">
-<li>math</li>
-<li>topic, sidebar</li>
-<li>admonitions (note, warning)</li>
-<li>code-block</li>
-<li>image</li>
-<li>epigraph</li>
-<li>raw</li>
-<li>include</li>
-</ul>
-</li>
-<li><p class="first">Other may not be styled yet (but it can be extended) or do not make sense in this context (a table of content would display all slide titles).</p>
-</li>
-</ul>
-</section>
+    <section>
+        <h2>Directives processed by rst2reveal</h2>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Directives processed by rst2reveal</h2>
-<ul>
-<li><p class="first"><strong>rst2reveal</strong> additionally implements several custom directives particularly suited for scientific presentations:</p>
-<ul class="simple">
-<li>video</li>
-<li>matplotlib</li>
-<li>columns</li>
-</ul>
+    <section>
+        <h2>Directives processed by rst2reveal</h2>
+            <ul>
+                <li><p class="first">For a richer content than these basic markups, you'll need to use the docutils <strong>directives</strong>.</p>
 </li>
-<li><p class="first">However, usage of these directives disrupts the compatibility of your input file with other ReST renderers (Sphinx, pandoc...).</p>
+                <li><p class="first">Some of the standard directives are processed by rst2reveal:</p>
+            <ul class="simple">
+                <li>math</li>
+                <li>topic, sidebar</li>
+                <li>admonitions (note, warning)</li>
+                <li>code-block</li>
+                <li>image</li>
+                <li>epigraph</li>
+                <li>raw</li>
+                <li>include</li>
+            </ul>
 </li>
-</ul>
-</section>
+                <li><p class="first">Other may not be styled yet (but it can be extended) or do not make sense in this context (a table of content would display all slide titles).</p>
+</li>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Usual directives</h2>
-</section>
+    <section>
+        <h2>Directives processed by rst2reveal</h2>
+            <ul>
+                <li><p class="first"><strong>rst2reveal</strong> additionally implements several custom directives particularly suited for scientific presentations:</p>
+            <ul class="simple">
+                <li>video</li>
+                <li>matplotlib</li>
+                <li>columns</li>
+            </ul>
+</li>
+                <li><p class="first">However, usage of these directives disrupts the compatibility of your input file with other ReST renderers (Sphinx, pandoc...).</p>
+</li>
+            </ul>
+    </section>
 </section>
 
 <section>
+    <section>
+        <h2>Usual directives</h2>
+    </section>
+</section>
+
 <section>
-<h2>Displaying mathematical equations</h2>
+    <section>
+        <h2>Displaying mathematical equations</h2>
 <p>Mathematical terms can be rendered inline <span class="math">\(x(t)\)</span>
  using <a class="reference external" href="http://www.mathjax.org/">MathJax.js</a>:</p>
 <pre class="literal-block">
@@ -308,45 +308,45 @@ b &amp;= a + d
     a &amp;= b + c \\
     b &amp;= a + d
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Images</h2>
-<div class="align-center">
-<img alt="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" class="align-center" src="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" style="width: 40%;" />
-</div>
-<ul>
-<li><p class="first">Images can be centered and scaled between 0 and 100% using the <tt class="docutils literal">image</tt> directive:</p>
+    <section>
+        <h2>Images</h2>
+            <div class="align-center">
+            <img alt="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" class="align-center" src="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" style="width: 40%;" />
+            </div>
+            <ul>
+                <li><p class="first">Images can be centered and scaled between 0 and 100% using the <tt class="docutils literal">image</tt> directive:</p>
 <pre class="literal-block">
 .. image:: http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg
     :width: 40%
     :align: center
 </pre>
 </li>
-<li><p class="first">You can provide either an URL or a path relative to the current directory.</p>
+                <li><p class="first">You can provide either an URL or a path relative to the current directory.</p>
 </li>
-</ul>
-</section>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Images</h2>
-<div class="align-right">
-<img alt="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" class="align-right" src="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" style="width: 50%;" />
-</div>
-<ul style="display: inline;"><li>Images can also be aligned to the left or to the right, with the corresponding scaling:</li>
-</ul>
+    <section>
+        <h2>Images</h2>
+            <div class="align-right">
+            <img alt="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" class="align-right" src="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" style="width: 50%;" />
+            </div>
+            <ul style="display: inline;">                <li>Images can also be aligned to the left or to the right, with the corresponding scaling:</li>
+            </ul>
 <p><tt class="docutils literal">:width: 50%</tt></p>
 <p><tt class="docutils literal">:align: right</tt></p>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Code blocks</h2>
+    <section>
+        <h2>Code blocks</h2>
 <p>The default way to show some code is to end a line with <tt class="docutils literal">::</tt> and indent the code:</p>
 <pre class="literal-block">
 from rst2reveal import Parser
@@ -365,17 +365,17 @@ The default way to show some code is to end a line with ``::`` and indent the co
                          theme='beige' )
     parser.create_slides()
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Code blocks</h2>
-<ul class="simple">
-<li>If you want to color-highlight the code, you need to have the Python package <a class="reference external" href="http://www.pygments.org">Pygments</a> installed on your computer.</li>
-<li>You can then use the <tt class="docutils literal"><span class="pre">code-block</span></tt> directive by specifying the language as an argument:</li>
-</ul>
-<code><div class="highlight"><pre><span class="kn">from</span> <span class="nn">rst2reveal</span> <span class="kn">import</span> <span class="n">Parser</span>
+    <section>
+        <h2>Code blocks</h2>
+            <ul class="simple">
+                <li>If you want to color-highlight the code, you need to have the Python package <a class="reference external" href="http://www.pygments.org">Pygments</a> installed on your computer.</li>
+                <li>You can then use the <tt class="docutils literal"><span class="pre">code-block</span></tt> directive by specifying the language as an argument:</li>
+            </ul>
+            <code><div class="highlight"><pre><span class="kn">from</span> <span class="nn">rst2reveal</span> <span class="kn">import</span> <span class="n">Parser</span>
 <span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">(</span> <span class="n">input_file</span><span class="o">=</span><span class="s">&#39;index.rst&#39;</span><span class="p">,</span>
                  <span class="n">output_file</span><span class="o">=</span><span class="s">&#39;index.html&#39;</span><span class="p">,</span>
                  <span class="n">theme</span><span class="o">=</span><span class="s">&#39;beige&#39;</span> <span class="p">)</span>
@@ -391,14 +391,14 @@ The default way to show some code is to end a line with ``::`` and indent the co
                      theme='beige' )
     parser.create_slides()
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Code blocks</h2>
+    <section>
+        <h2>Code blocks</h2>
 <p><a class="reference external" href="http://www.pygments.org">Pygments</a> can highlight a lot of languages, for example C++:</p>
-<code><div class="highlight"><pre><span class="cp">#include &lt;stdio&gt;</span>
+            <code><div class="highlight"><pre><span class="cp">#include &lt;stdio&gt;</span>
 
 <span class="kt">void</span> <span class="n">test</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -421,22 +421,22 @@ The default way to show some code is to end a line with ``::`` and indent the co
         std::cout &lt;&lt; &quot;Hello, World!&quot; &lt;&lt; std::endl;
     }
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Code blocks</h2>
-<ul>
-<li><p class="first">There is a big selection of themes you can use to highlight the code, by specifying the <tt class="docutils literal">pygments_style</tt> option to rst2reveal (depending on your Pygments version)</p>
+    <section>
+        <h2>Code blocks</h2>
+            <ul>
+                <li><p class="first">There is a big selection of themes you can use to highlight the code, by specifying the <tt class="docutils literal">pygments_style</tt> option to rst2reveal (depending on your Pygments version)</p>
 <p><span class="small">monokai, manni, perldoc, borland, colorful, default, murphy, vs, trac, tango, fruity, autumn, bw, emacs, vim, pastie, friendly, native</span></p>
 </li>
-<li><p class="first">Especially if you use a dark theme, it is advised to change the Pygments style (to monokai or manni for example).</p>
+                <li><p class="first">Especially if you use a dark theme, it is advised to change the Pygments style (to monokai or manni for example).</p>
 </li>
-<li><p class="first">You can specify the <tt class="docutils literal">:linenos:</tt> option to the <tt class="docutils literal"><span class="pre">code-block</span></tt> directive to add line numbers.</p>
+                <li><p class="first">You can specify the <tt class="docutils literal">:linenos:</tt> option to the <tt class="docutils literal"><span class="pre">code-block</span></tt> directive to add line numbers.</p>
 </li>
-</ul>
-<code><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+            </ul>
+            <code><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -454,15 +454,15 @@ The default way to show some code is to end a line with ``::`` and indent the co
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello, World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table></code></section>
+</td></tr></table></code>    </section>
 </section>
 
 <section>
-<section>
-<h2>Topic</h2>
+    <section>
+        <h2>Topic</h2>
 <p>The <tt class="docutils literal">topic</tt> directive allows to highlight important blocks of text with a title:</p>
 <div class="topic">
-<p class="topic-title first">Equation</p>
+            <p class="topic-title first">Equation            </p>
 <p>A leaky integrator is defined by:</p>
 <div class="math">
 \begin{equation*}
@@ -480,15 +480,15 @@ The default way to show some code is to end a line with ``::`` and indent the co
 
         \tau \frac{dx(t)}{dt} + x(t) = f(t)
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Admonitions</h2>
+    <section>
+        <h2>Admonitions</h2>
 <p>Admonitions are similar to topic, but the title is built-in. For now, only <tt class="docutils literal">note</tt>:</p>
 <div class="note">
-<p class="first admonition-title">Note</p>
+            <p class="first admonition-title">Note            </p>
 <p class="last">This is a note</p>
 </div>
 <pre class="literal-block">
@@ -498,7 +498,7 @@ The default way to show some code is to end a line with ``::`` and indent the co
 </pre>
 <p>and <tt class="docutils literal">caution</tt> are implemented:</p>
 <div class="caution">
-<p class="first admonition-title">Caution!</p>
+            <p class="first admonition-title">Caution!            </p>
 <p class="last">This is a warning</p>
 </div>
 <pre class="literal-block">
@@ -506,23 +506,23 @@ The default way to show some code is to end a line with ``::`` and indent the co
 
     This is a warning
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Sidebar</h2>
+    <section>
+        <h2>Sidebar</h2>
 <div class="right sidebar">
-<p class="first sidebar-title">Sidebar Title</p>
+            <p class="first sidebar-title">Sidebar Title            </p>
 <p class="sidebar-subtitle">Optional Sidebar Subtitle</p>
 <p class="last">Subsequent indented lines comprise
 the body of the sidebar, and are
 interpreted as body elements.</p>
 </div>
-<ul style="display: inline;"><li>Sidebars are topics covering only 50% of the screen, floating either on the left or right side of the slide.</li>
-<li>They optionally take subtitles.</li>
-<li>Position is determined by the <tt class="docutils literal">class</tt> attribute.</li>
-</ul>
+            <ul style="display: inline;">                <li>Sidebars are topics covering only 50% of the screen, floating either on the left or right side of the slide.</li>
+                <li>They optionally take subtitles.</li>
+                <li>Position is determined by the <tt class="docutils literal">class</tt> attribute.</li>
+            </ul>
 <pre class="literal-block">
 .. sidebar:: Sidebar Title
    :subtitle: Optional Sidebar Subtitle
@@ -532,52 +532,52 @@ interpreted as body elements.</p>
    the body of the sidebar, and are
    interpreted as body elements.
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Sidebar</h2>
+    <section>
+        <h2>Sidebar</h2>
 <div class="left sidebar">
-<p class="first sidebar-title">An image</p>
+            <p class="first sidebar-title">An image            </p>
 <p class="sidebar-subtitle">with its subtitle</p>
-<div class="align-center">
-<img alt="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" src="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" style="width: 100%;" />
-</div>
+            <div class="align-center">
+            <img alt="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" src="http://collider.com/wp-content/uploads/monty-python-image-600x450.jpg" style="width: 100%;" />
+            </div>
 <p class="last"><span class="small">Fig. 1: legend of the image.</span></p>
 </div>
-<ul style="display: inline;"><li><p class="first">Sidebars can be useful to provide a title and legend to an image.</p>
+            <ul style="display: inline;">                <li><p class="first">Sidebars can be useful to provide a title and legend to an image.</p>
 </li>
-<li><p class="first">The legend can be made smaller by using the <tt class="docutils literal">small</tt> role:</p>
+                <li><p class="first">The legend can be made smaller by using the <tt class="docutils literal">small</tt> role:</p>
 <p><tt class="docutils literal"><span class="pre">:small:`Fig.</span> 1: legend of the image.`</tt></p>
 </li>
-</ul>
-</section>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Raw HTML</h2>
-<ul>
-<li><p class="first">In case rst2reveal does not offer what you need and you want to generate some HTML code by yourself, you can use the <tt class="docutils literal">raw:: html</tt> directive, which will simply dump the content of the directive into the generated code:</p>
+    <section>
+        <h2>Raw HTML</h2>
+            <ul>
+                <li><p class="first">In case rst2reveal does not offer what you need and you want to generate some HTML code by yourself, you can use the <tt class="docutils literal">raw:: html</tt> directive, which will simply dump the content of the directive into the generated code:</p>
 <pre class="literal-block">
 .. raw:: html
 
     &lt;span style=&quot;color:#ff0000&quot;&gt;Some text in red!&lt;/span&gt;
 </pre>
 </li>
-</ul>
-<span style="color:#ff0000">Some text in red!</span></section>
+            </ul>
+<span style="color:#ff0000">Some text in red!</span>    </section>
 </section>
 
 <section>
-<section>
-<h2>Citations</h2>
+    <section>
+        <h2>Citations</h2>
 <p>Citations can be rendered with the role <tt class="docutils literal">epigraph</tt>:</p>
-<blockquote class="epigraph">
+            <blockquote class="epigraph">
 <p>&quot;L'important, c'est de bien s'ennuyer.&quot;</p>
 <p class="attribution">&mdash;Jean Carmet</p>
-</blockquote>
+            </blockquote>
 <pre class="literal-block">
 .. epigraph::
 
@@ -585,61 +585,61 @@ interpreted as body elements.</p>
 
     -- Jean Carmet
 </pre>
-</section>
-</section>
-
-<section>
-<section>
-<h2>Directives specific to rst2reveal</h2>
-</section>
+    </section>
 </section>
 
 <section>
+    <section>
+        <h2>Directives specific to rst2reveal</h2>
+    </section>
+</section>
+
 <section>
-<h2>Videos</h2>
-    <div class="align-center">
-    <video style="text-align:center; float:center" width="70%"   controls>
-      <source src="http://techslides.com/demos/sample-videos/small.ogv" type="video/ogg">
-      Your browser does not support the video tag.
-    </video>
-    </div>
-<ul class="simple">
-<li>Videos can displayed with the HTML5 video tag</li>
-</ul>
+    <section>
+        <h2>Videos</h2>
+            <div class="align-center">
+                <video style="text-align:center; float:center" width="70%"   controls>
+                      <source src="http://techslides.com/demos/sample-videos/small.ogv" type="video/ogg">
+                      Your browser does not support the video tag.
+                </video>
+            </div>
+            <ul class="simple">
+                <li>Videos can displayed with the HTML5 video tag</li>
+            </ul>
 <pre class="literal-block">
 .. video:: http://techslides.com/demos/sample-videos/small.ogv
     :width: 70%
 </pre>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Videos</h2>
-    <div class="align-center">
-    <video style="text-align:center; float:center" width="30%"   controls>
-      <source src="http://techslides.com/demos/sample-videos/small.ogv" type="video/ogg">
-      Your browser does not support the video tag.
-    </video>
-    </div>
-<ul class="simple">
-<li>You can specify the <tt class="docutils literal">loop</tt> and <tt class="docutils literal">autoplay</tt> options to the directive to loop the video or start the video as soon as the slide appears.</li>
-</ul>
+    <section>
+        <h2>Videos</h2>
+            <div class="align-center">
+                <video style="text-align:center; float:center" width="30%"   controls>
+                      <source src="http://techslides.com/demos/sample-videos/small.ogv" type="video/ogg">
+                      Your browser does not support the video tag.
+                </video>
+            </div>
+            <ul class="simple">
+                <li>You can specify the <tt class="docutils literal">loop</tt> and <tt class="docutils literal">autoplay</tt> options to the directive to loop the video or start the video as soon as the slide appears.</li>
+            </ul>
 <pre class="literal-block">
 .. video:: http://techslides.com/demos/sample-videos/small.ogv
     :width: 70%
     :loop:
     :autoplay:
 </pre>
-<ul class="simple">
-<li>The video must be in <tt class="docutils literal">.webm</tt>, <tt class="docutils literal">.ogv</tt> or <tt class="docutils literal">.mp4</tt> depending on your browser. Other formats can not be played.</li>
-</ul>
-</section>
+            <ul class="simple">
+                <li>The video must be in <tt class="docutils literal">.webm</tt>, <tt class="docutils literal">.ogv</tt> or <tt class="docutils literal">.mp4</tt> depending on your browser. Other formats can not be played.</li>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Incremental display</h2>
+    <section>
+        <h2>Incremental display</h2>
 <p>You can incrementally display the content of your slide by using the <tt class="docutils literal">fragment</tt> class:</p>
 <pre class="fragment literal-block">
 .. class:: fragment
@@ -648,16 +648,16 @@ interpreted as body elements.</p>
 
     * It applies until the end of the slides.
 </pre>
-<ul class="fragmented_list simple">
-<li class="fragment">Items will be displayed in the order of their declaration.</li>
-<li class="fragment">It applies until the end of the current slide.</li>
-</ul>
-</section>
+            <ul class="fragmented_list simple">
+                <li class="fragment">Items will be displayed in the order of their declaration.</li>
+                <li class="fragment">It applies until the end of the current slide.</li>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Matplotlib</h2>
+    <section>
+        <h2>Matplotlib</h2>
 <p>You can directly generate plots if matplotlib is installed:</p>
 <div class="align-center">
    <svg class="align-center" width=70% viewBox="0 0 576 432" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg >"
@@ -1841,14 +1841,14 @@ interpreted as body elements.</p>
    </svg>
 
 </div>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Matplotlib</h2>
+    <section>
+        <h2>Matplotlib</h2>
 <p>Simply use the <tt class="docutils literal">matplotlib</tt> directive and write the corresponding matplotlib code:</p>
-<code><div class="highlight"><pre><span class="o">..</span> <span class="n">matplotlib</span><span class="p">::</span>
+            <code><div class="highlight"><pre><span class="o">..</span> <span class="n">matplotlib</span><span class="p">::</span>
     <span class="p">:</span><span class="n">align</span><span class="p">:</span> <span class="n">center</span>
     <span class="p">:</span><span class="n">width</span><span class="p">:</span> <span class="mi">80</span><span class="o">%</span>
 
@@ -1866,51 +1866,51 @@ interpreted as body elements.</p>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
-</code></section>
+</code>    </section>
 </section>
 
 <section>
-<section>
-<h2>Matplotlib</h2>
-<ul class="simple">
-<li>You basically only need to write everything you would normally put between:</li>
-</ul>
-<code><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
+    <section>
+        <h2>Matplotlib</h2>
+            <ul class="simple">
+                <li>You basically only need to write everything you would normally put between:</li>
+            </ul>
+            <code><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">()</span>
 </pre></div>
 </code><p>and:</p>
-<code><div class="highlight"><pre><span class="n">show</span><span class="p">()</span>
+            <code><div class="highlight"><pre><span class="n">show</span><span class="p">()</span>
 </pre></div>
-</code><ul class="simple">
-<li>The python code is interpreted &quot;as-if&quot; with <tt class="docutils literal">exec</tt> statements, so be careful with what you write!</li>
-<li>The figure is internally generated in <tt class="docutils literal">.svg</tt> format, and pasted in the HTML source.</li>
-</ul>
-</section>
+</code>            <ul class="simple">
+                <li>The python code is interpreted &quot;as-if&quot; with <tt class="docutils literal">exec</tt> statements, so be careful with what you write!</li>
+                <li>The figure is internally generated in <tt class="docutils literal">.svg</tt> format, and pasted in the HTML source.</li>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Matplotlib</h2>
-<ul>
-<li><p class="first">If you use a dark background, you can either:</p>
-<ul class="simple">
-<li>control the transparency of the figure background with the <tt class="docutils literal">:alpha:</tt> option (between 0.0 and 1.0).</li>
-<li>invert all colours and use a transparent background with the <tt class="docutils literal">:invert:</tt> option.</li>
-</ul>
+    <section>
+        <h2>Matplotlib</h2>
+            <ul>
+                <li><p class="first">If you use a dark background, you can either:</p>
+            <ul class="simple">
+                <li>control the transparency of the figure background with the <tt class="docutils literal">:alpha:</tt> option (between 0.0 and 1.0).</li>
+                <li>invert all colours and use a transparent background with the <tt class="docutils literal">:invert:</tt> option.</li>
+            </ul>
 </li>
-</ul>
-</section>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Matplotlib</h2>
-<ul class="simple">
-<li>By providing the <tt class="docutils literal">:xkcd:</tt> option, you can alter the rendering of the plot to give it a hand-drawn look-and-feel.</li>
-<li>You can optionally provide a float as an option to :xkcd: to define the amount of distortion (0.0 = None, 1.5 = default).</li>
-<li>The function is based on the script provided by <a class="reference external" href="http://jakevdp.github.io/blog/2012/10/07/xkcd-style-plots-in-matplotlib/">Jake Vanderplas</a>.</li>
-<li>If you use Matplotlib 1.3, you now just need to call <tt class="docutils literal">xkcd()</tt> in your code.</li>
-</ul>
+    <section>
+        <h2>Matplotlib</h2>
+            <ul class="simple">
+                <li>By providing the <tt class="docutils literal">:xkcd:</tt> option, you can alter the rendering of the plot to give it a hand-drawn look-and-feel.</li>
+                <li>You can optionally provide a float as an option to :xkcd: to define the amount of distortion (0.0 = None, 1.5 = default).</li>
+                <li>The function is based on the script provided by <a class="reference external" href="http://jakevdp.github.io/blog/2012/10/07/xkcd-style-plots-in-matplotlib/">Jake Vanderplas</a>.</li>
+                <li>If you use Matplotlib 1.3, you now just need to call <tt class="docutils literal">xkcd()</tt> in your code.</li>
+            </ul>
 <div class="align-center">
    <svg class="align-center" width=50% viewBox="0 0 576 432" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg >"
     <defs>
@@ -1932,460 +1932,470 @@ interpreted as body elements.</p>
       <g id="line2d_1">
        <path clip-path="url(#p5a67343740)" d="
    M44.3077 403.826
-   L71.0137 403.739
-   L84.3667 403.418
-   L93.2687 403.235
-   L99.9452 403.3
-   L106.622 403.592
-   L131.102 405.006
-   L137.779 405.053
-   L146.681 404.845
-   L162.259 404.388
-   L173.387 404.357
-   L182.289 404.517
-   L188.965 404.837
-   L202.318 405.705
-   L206.769 405.757
-   L211.22 405.557
-   L215.671 405.104
-   L222.348 404.124
-   L229.024 403.167
-   L233.475 402.737
-   L237.926 402.536
-   L242.377 402.55
-   L249.054 402.831
-   L264.632 403.607
-   L284.662 404.252
-   L306.917 404.755
-   L315.819 404.777
-   L322.495 404.584
-   L331.397 404.054
-   L346.976 403.004
-   L353.652 402.828
-   L360.329 402.962
-   L369.231 403.491
-   L375.907 403.805
-   L380.358 403.81
-   L384.809 403.606
-   L391.486 402.988
-   L400.388 402.066
-   L404.839 401.772
-   L409.29 401.645
-   L415.966 401.71
-   L442.672 402.566
-   L451.574 402.778
-   L460.476 402.744
-   L473.829 402.593
-   L482.731 402.801
-   L496.084 403.172
-   L507.212 403.37
-   L513.888 403.777
-   L520.565 404.47
-   L529.467 405.419
-   L531.692 405.589
-   L531.692 405.589" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2.0;"/>
+   L73.2392 403.744
+   L84.3667 403.457
+   L104.396 402.782
+   L111.073 402.862
+   L117.749 403.173
+   L140.004 404.568
+   L146.681 404.654
+   L155.583 404.485
+   L182.289 403.635
+   L224.573 403.549
+   L251.279 403.151
+   L269.083 402.661
+   L275.76 402.805
+   L282.436 403.206
+   L298.015 404.308
+   L304.691 404.415
+   L313.593 404.194
+   L322.495 404.008
+   L329.172 404.128
+   L346.976 404.718
+   L353.652 404.537
+   L371.456 403.756
+   L393.711 403.495
+   L404.839 402.97
+   L409.29 402.946
+   L413.741 403.108
+   L420.417 403.643
+   L429.319 404.462
+   L433.77 404.718
+   L438.221 404.814
+   L444.898 404.688
+   L458.251 404.025
+   L480.506 402.853
+   L493.859 401.803
+   L498.31 401.669
+   L502.761 401.763
+   L507.212 402.079
+   L520.565 403.387
+   L525.016 403.525
+   L529.467 403.388
+   L531.692 403.217
+   L531.692 403.217" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2.0;"/>
       </g>
       <g id="line2d_2">
        <path clip-path="url(#p5a67343740)" d="
    M66.4615 413.217
-   L66.3591 380.98
-   L66.3464 371.498
-   L66.5098 365.809
-   L66.9915 358.224
-   L67.5994 348.742
-   L67.6966 343.054
-   L67.5291 335.468
-   L66.79 312.712
-   L66.8705 307.023
-   L67.1784 301.334
-   L67.7401 291.853
-   L67.7668 288.06
-   L67.6129 284.268
-   L67.0814 278.579
-   L65.5448 265.304
-   L65.1638 259.615
-   L64.9373 252.03
-   L64.9898 244.445
-   L65.328 236.86
-   L65.8898 225.482
-   L66.3207 212.207
-   L66.654 208.415
-   L67.4067 202.726
-   L68.5088 195.14
-   L68.8661 191.348
-   L68.9852 187.555
-   L68.8524 183.763
-   L68.3056 178.074
-   L67.2933 168.592
-   L66.822 161.007
-   L66.4296 155.318
-   L65.8021 149.629
-   L64.6488 140.147
-   L64.4715 136.355
-   L64.5913 132.562
-   L65.0134 128.769
-   L66.0378 123.08
-   L67.1094 117.391
-   L67.6145 113.599
-   L67.8588 109.806
-   L67.8485 106.013
-   L67.5305 100.324
-   L67.0892 92.7391
-   L66.9454 85.1538
-   L66.8171 79.4649
-   L66.4516 73.7759
-   L65.2473 60.5017
-   L65.1545 56.709
-   L65.2527 52.9164
-   L65.7047 47.2274
-   L67.4802 30.1605
-   L67.7238 24.4716
-   L67.7483 18.7826
-   L67.7483 18.7826" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2.0;"/>
+   L66.5688 384.773
+   L66.8216 377.187
+   L67.6085 360.12
+   L67.5331 356.328
+   L67.2797 352.535
+   L66.6023 346.846
+   L64.9756 335.468
+   L64.4604 329.779
+   L64.2438 324.09
+   L64.3201 318.401
+   L64.711 312.712
+   L65.3931 307.023
+   L66.4021 299.438
+   L66.7417 295.645
+   L66.8926 291.853
+   L66.8163 286.164
+   L66.5958 278.579
+   L66.6923 272.89
+   L67.0801 267.201
+   L68.041 255.823
+   L68.1394 252.03
+   L68.0092 248.237
+   L67.6174 244.445
+   L66.9781 240.652
+   L65.711 234.963
+   L64.4059 229.274
+   L63.694 225.482
+   L63.1857 221.689
+   L62.8958 217.896
+   L62.8015 214.104
+   L62.9317 208.415
+   L63.3922 200.829
+   L64.3343 189.452
+   L65.4808 178.074
+   L67.5352 159.11
+   L67.7417 155.318
+   L67.7681 151.525
+   L67.5714 147.732
+   L67.1371 143.94
+   L66.493 140.147
+   L63.8858 126.873
+   L63.4894 123.08
+   L63.3909 119.288
+   L63.6069 115.495
+   L64.1108 111.702
+   L64.8334 107.91
+   L66.8425 98.4281
+   L67.4 94.6355
+   L67.695 90.8428
+   L67.7306 87.0502
+   L67.4451 81.3612
+   L66.6803 69.9833
+   L65.0069 37.7458
+   L63.8242 22.5753
+   L63.73 18.7826
+   L63.73 18.7826" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2.0;"/>
       </g>
       <g id="line2d_3">
        <path clip-path="url(#p5a67343740)" d="
    M66.4615 216
    L68.5024 215.257
-   L70.5135 214.459
-   L74.4424 212.704
-   L78.2405 210.754
-   L81.9038 208.631
-   L85.4317 206.361
-   L88.8246 203.968
-   L93.6627 200.202
-   L98.2132 196.283
-   L102.534 192.235
-   L108.163 186.596
-   L119.795 174.496
-   L132.787 160.874
-   L135.473 158.471
-   L138.464 156.105
-   L141.85 153.78
-   L145.679 151.549
-   L147.764 150.502
-   L149.957 149.531
-   L152.249 148.664
-   L154.62 147.937
-   L157.037 147.395
-   L159.453 147.079
-   L161.808 147.027
-   L164.053 147.256
-   L166.158 147.757
-   L168.113 148.504
-   L169.929 149.453
-   L171.618 150.564
-   L173.195 151.801
-   L174.673 153.134
-   L177.368 156.002
-   L179.764 159.051
-   L181.928 162.225
-   L184.905 167.175
-   L188.67 174.058
-   L192.24 181.123
-   L196.404 190.08
-   L199.888 197.402
-   L203.467 204.813
-   L205.069 208.489
-   L206.443 212.12
-   L207.593 215.709
-   L214.252 239.115
-   L215.53 244.508
-   L217.999 255.31
-   L219.704 262.544
-   L220.759 267.93
-   L222.104 275.107
-   L222.996 278.741
-   L224.118 282.422
-   L226.775 289.868
-   L228.601 295.417
-   L229.576 299.066
-   L232.611 311.744
-   L233.824 315.431
-   L235.995 321.03
-   L239.772 330.381
-   L241.699 335.906
-   L243.298 341.342
-   L245.103 348.479
-   L247.356 357.31
-   L248.955 362.606
-   L250.823 367.912
-   L252.998 373.227
-   L254.659 376.783
-   L256.533 380.356
-   L258.648 383.955
-   L261.004 387.578
-   L263.574 391.198
-   L266.295 394.771
-   L269.132 398.206
-   L272.074 401.363
-   L273.624 402.702
-   L275.238 403.741
-   L276.832 404.258
-   L278.481 404.047
-   L280.211 403.229
-   L281.879 402.016
-   L283.457 400.574
-   L286.331 397.434
-   L288.79 394.149
-   L290.902 390.792
-   L292.736 387.385
-   L295.14 382.204
-   L302.917 364.164
-   L307.136 354.85
-   L309.329 349.31
-   L310.548 345.659
-   L311.56 342.043
-   L312.766 336.665
-   L314.994 325.882
-   L316.865 318.582
-   L319.716 307.591
-   L322.228 296.638
-   L325.118 283.845
-   L326.687 278.298
-   L328.535 272.699
-   L331.052 265.224
-   L332.71 259.662
-   L337.892 241.198
-   L341.103 230.121
-   L344.517 217.295
-   L347.169 206.402
-   L348.947 199.173
-   L350.51 193.725
-   L352.345 188.237
-   L355.774 179.055
-   L359.07 169.988
-   L362.787 159.352
-   L364.962 154.058
-   L367.481 148.756
-   L371.157 141.796
-   L374.03 136.796
-   L376.077 133.616
-   L378.36 130.587
-   L379.633 129.14
-   L381.019 127.749
-   L382.54 126.428
-   L384.215 125.194
-   L386.063 124.071
-   L388.094 123.103
-   L390.297 122.327
-   L392.611 121.79
-   L394.949 121.542
-   L397.211 121.589
-   L399.32 121.917
-   L401.257 122.49
-   L403.031 123.26
-   L404.666 124.187
-   L406.193 125.244
-   L409.036 127.661
-   L411.74 130.394
-   L415.752 134.915
-   L419.746 139.728
-   L423.597 144.639
-   L428.397 151.185
-   L442.608 171.129
-   L450.886 182.571
-   L457.289 191.529
-   L460.634 195.774
-   L463.052 198.555
-   L465.674 201.311
-   L468.536 204.053
-   L471.665 206.788
-   L475.071 209.52
-   L478.736 212.234
-   L482.615 214.889
-   L486.639 217.41
-   L490.738 219.692
-   L494.866 221.627
-   L496.937 222.434
-   L499.013 223.123
-   L501.098 223.692
-   L503.197 224.141
-   L507.446 224.7
-   L509.601 224.829
-   L509.601 224.829" style="fill:none;stroke:#0000ff;stroke-linecap:square;stroke-width:6;"/>
+   L70.5135 214.458
+   L74.4431 212.703
+   L78.2438 210.749
+   L81.9159 208.617
+   L85.466 206.324
+   L88.9045 203.89
+   L93.8743 200.017
+   L98.6259 195.951
+   L103.141 191.78
+   L107.418 187.562
+   L114.299 180.378
+   L124.528 169.678
+   L133.32 160.757
+   L137.514 156.794
+   L140.392 154.361
+   L143.482 152.091
+   L146.902 150.006
+   L148.764 149.052
+   L150.735 148.179
+   L152.813 147.407
+   L154.98 146.769
+   L157.208 146.302
+   L159.445 146.044
+   L161.63 146.033
+   L163.709 146.284
+   L165.647 146.792
+   L167.432 147.534
+   L169.079 148.475
+   L170.607 149.581
+   L172.04 150.824
+   L174.722 153.625
+   L177.271 156.738
+   L180.992 161.774
+   L184.543 167.022
+   L186.725 170.552
+   L188.722 174.077
+   L191.417 179.363
+   L200.912 199.285
+   L202.452 202.925
+   L203.79 206.528
+   L204.917 210.094
+   L206.3 215.398
+   L208.43 224.268
+   L210.028 229.695
+   L211.982 235.217
+   L215.44 244.488
+   L216.599 248.156
+   L217.552 251.783
+   L220.969 266.249
+   L222.208 269.95
+   L226.937 282.992
+   L227.932 286.648
+   L228.68 290.253
+   L229.476 295.595
+   L230.496 302.702
+   L231.224 306.297
+   L232.175 309.934
+   L233.342 313.613
+   L235.367 319.184
+   L238.102 326.608
+   L239.842 332.098
+   L241.238 337.497
+   L243.821 348.174
+   L244.943 351.767
+   L246.265 355.393
+   L249.28 362.693
+   L252.205 369.883
+   L256.885 381.913
+   L258.433 385.238
+   L260.208 388.506
+   L262.287 391.7
+   L263.472 393.26
+   L264.776 394.783
+   L266.218 396.266
+   L267.825 397.685
+   L269.649 398.997
+   L271.728 400.161
+   L274.066 401.115
+   L276.559 401.721
+   L278.99 401.844
+   L281.161 401.486
+   L282.98 400.727
+   L284.505 399.655
+   L285.838 398.379
+   L287.047 396.983
+   L289.223 393.928
+   L291.222 390.652
+   L294.011 385.505
+   L296.587 380.226
+   L299.74 373.081
+   L305.015 360.344
+   L307.133 354.85
+   L309.042 349.376
+   L317.538 323.641
+   L320.647 314.368
+   L322.268 308.841
+   L323.595 303.363
+   L324.613 297.936
+   L325.645 290.751
+   L326.689 283.554
+   L327.734 278.105
+   L329.063 272.602
+   L331.926 261.559
+   L333.043 256.097
+   L335.637 241.623
+   L336.683 237.936
+   L337.991 234.201
+   L340.32 228.532
+   L343.515 220.96
+   L344.91 217.217
+   L346.108 213.516
+   L347.619 208.03
+   L350.496 197.133
+   L353.976 184.496
+   L357.138 172.117
+   L358.775 166.827
+   L360.043 163.287
+   L361.485 159.731
+   L363.134 156.149
+   L365.011 152.533
+   L367.103 148.885
+   L370.525 143.398
+   L377.375 132.949
+   L379.622 129.83
+   L382.066 126.976
+   L383.438 125.67
+   L384.953 124.46
+   L386.636 123.367
+   L388.503 122.429
+   L390.551 121.687
+   L392.72 121.19
+   L394.931 120.99
+   L397.096 121.097
+   L399.141 121.495
+   L401.052 122.148
+   L402.84 123.007
+   L404.53 124.035
+   L406.152 125.203
+   L409.29 127.867
+   L412.396 130.86
+   L417.087 135.741
+   L421.732 140.851
+   L426.177 146.011
+   L430.318 151.125
+   L434.078 156.134
+   L437.375 160.974
+   L440.194 165.614
+   L447.02 177.55
+   L450.055 182.131
+   L453.468 186.792
+   L457.226 191.492
+   L461.318 196.204
+   L465.71 200.877
+   L470.318 205.408
+   L473.476 208.285
+   L476.715 211.016
+   L480.076 213.595
+   L483.603 216.03
+   L487.319 218.323
+   L491.208 220.446
+   L495.22 222.327
+   L499.302 223.862
+   L501.359 224.467
+   L503.427 224.95
+   L505.508 225.307
+   L507.604 225.539
+   L509.718 225.652
+   L509.718 225.652" style="fill:none;stroke:#0000ff;stroke-linecap:square;stroke-width:6;"/>
       </g>
       <g id="line2d_4">
        <path clip-path="url(#p5a67343740)" d="
    M66.4615 231.418
-   L74.7278 234.194
-   L81.0245 236.051
-   L85.293 237.091
-   L89.6274 237.895
-   L94.0271 238.374
-   L96.2486 238.46
-   L98.4817 238.427
-   L100.724 238.264
-   L102.971 237.961
-   L105.219 237.514
-   L107.463 236.92
-   L109.699 236.185
-   L111.92 235.317
-   L116.292 233.234
-   L120.513 230.798
-   L124.5 228.144
-   L128.154 225.39
-   L131.384 222.623
-   L134.13 219.887
-   L136.4 217.178
-   L138.277 214.461
-   L139.907 211.675
-   L147.705 197.432
-   L153.646 186.959
-   L158.311 178.144
-   L161.877 171.064
-   L164.294 165.8
-   L166.367 160.621
-   L168.754 153.802
-   L170.582 148.661
-   L172.686 143.429
-   L175.139 138.091
-   L177.895 132.665
-   L181.909 125.343
-   L188.318 114.294
-   L193.489 105.236
-   L197.187 98.278
-   L201.54 90.0494
-   L203.417 86.9057
-   L205.502 83.859
-   L207.89 80.9466
-   L209.23 79.5678
-   L210.686 78.2637
-   L212.272 77.066
-   L214.009 76.0397
-   L215.917 75.262
-   L217.949 74.8419
-   L220.051 74.8956
-   L222.147 75.4134
-   L224.131 76.3039
-   L225.967 77.4711
-   L227.67 78.821
-   L229.255 80.2817
-   L232.135 83.4295
-   L234.723 86.7515
-   L237.058 90.1667
-   L239.153 93.6224
-   L241.007 97.0931
-   L242.644 100.573
-   L244.817 105.821
-   L250.546 120.232
-   L252.696 125.731
-   L253.951 129.374
-   L254.998 132.985
-   L255.832 136.564
-   L256.767 141.892
-   L258.635 154.369
-   L259.736 159.81
-   L264.265 179.953
-   L265.421 185.45
-   L266.374 189.15
-   L267.552 192.892
-   L268.96 196.674
-   L272.171 204.309
-   L274.429 210.01
-   L275.652 213.763
-   L276.607 217.47
-   L277.34 221.14
-   L279.285 232.11
-   L280.646 237.662
-   L282.283 243.259
-   L285.291 252.634
-   L287.928 260.172
-   L290.578 267.71
-   L291.68 271.438
-   L292.505 275.116
-   L293.025 278.736
-   L293.299 282.307
-   L293.672 289.401
-   L294.088 292.98
-   L294.795 296.608
-   L295.804 300.288
-   L297.057 304.01
-   L300.623 313.384
-   L302.658 318.972
-   L304.455 324.493
-   L305.999 329.932
-   L309.789 344.139
-   L310.999 347.685
-   L312.389 351.243
-   L314.751 356.578
-   L317.317 361.835
-   L320.045 366.918
-   L322.05 370.157
-   L324.347 373.225
-   L325.662 374.67
-   L327.126 376.033
-   L328.783 377.264
-   L330.68 378.303
-   L332.818 379.077
-   L335.099 379.462
-   L337.374 379.371
-   L339.486 378.863
-   L341.331 378.03
-   L342.934 376.956
-   L344.347 375.73
-   L345.613 374.404
-   L347.828 371.523
-   L349.808 368.422
-   L353.615 361.746
-   L360.453 349.263
-   L366.14 338.313
-   L368.814 332.83
-   L370.406 329.212
-   L371.784 325.642
-   L372.944 322.118
-   L374.413 316.885
-   L376.374 309.874
-   L378.154 304.519
-   L380.91 297.271
-   L383.651 290.023
-   L385.47 284.65
-   L388.986 273.956
-   L391.072 268.539
-   L394.937 259.437
-   L406.419 232.582
-   L409.374 225.654
-   L411.061 222.172
-   L412.958 218.655
-   L415.068 215.1
-   L418.551 209.726
-   L423.535 202.607
-   L428.666 195.752
-   L432.614 190.933
-   L435.361 187.944
-   L438.264 185.196
-   L439.792 183.937
-   L441.381 182.774
-   L443.034 181.725
-   L444.756 180.811
-   L446.551 180.055
-   L448.418 179.477
-   L450.358 179.095
-   L452.367 178.918
-   L454.44 178.943
-   L456.565 179.156
-   L458.73 179.537
-   L463.114 180.689
-   L467.461 182.176
-   L473.675 184.634
-   L481.173 187.882
-   L486.427 190.35
-   L491.776 193.111
-   L497.515 196.35
-   L510.076 203.866
-   L510.076 203.866" style="fill:none;stroke:#ff0000;stroke-linecap:square;stroke-width:6;"/>
+   L74.728 234.194
+   L81.0271 236.058
+   L85.3011 237.118
+   L89.6448 237.974
+   L94.0491 238.573
+   L98.4734 238.852
+   L102.837 238.749
+   L104.962 238.533
+   L107.031 238.201
+   L109.035 237.745
+   L110.966 237.164
+   L112.825 236.457
+   L114.616 235.627
+   L116.345 234.677
+   L119.661 232.446
+   L122.856 229.831
+   L125.989 226.914
+   L129.075 223.78
+   L133.563 218.843
+   L137.745 213.796
+   L140.286 210.434
+   L142.59 207.101
+   L144.642 203.802
+   L146.462 200.532
+   L148.9 195.628
+   L153.007 187.193
+   L155.854 181.896
+   L161.813 171.085
+   L165.422 163.935
+   L175.799 142.449
+   L181.617 129.962
+   L188.502 115.703
+   L197.122 96.9783
+   L199.558 92.153
+   L201.292 89.0485
+   L203.219 86.0411
+   L205.471 83.1462
+   L206.761 81.7502
+   L208.188 80.403
+   L209.768 79.1173
+   L211.521 77.9217
+   L213.467 76.8698
+   L215.605 76.0208
+   L217.86 75.4707
+   L220.112 75.3357
+   L222.24 75.6391
+   L224.149 76.3289
+   L225.835 77.3311
+   L227.357 78.5538
+   L228.758 79.9214
+   L231.331 82.9709
+   L233.754 86.2846
+   L237.193 91.5143
+   L239.286 95.0565
+   L241.127 98.5887
+   L242.68 102.091
+   L243.968 105.57
+   L245.6 110.795
+   L247.801 117.896
+   L249.751 123.36
+   L253.162 132.576
+   L254.278 136.226
+   L255.152 139.835
+   L256.14 145.203
+   L257.197 150.61
+   L258.204 154.284
+   L259.523 158.025
+   L261.918 163.72
+   L264.343 169.425
+   L265.743 173.189
+   L266.899 176.911
+   L267.828 180.595
+   L268.928 186.075
+   L271.27 198.845
+   L272.629 204.389
+   L273.752 208.123
+   L275.741 213.778
+   L279.287 223.245
+   L280.494 226.997
+   L281.466 230.708
+   L282.191 234.379
+   L282.71 238.013
+   L283.418 245.226
+   L284.173 252.441
+   L284.725 256.077
+   L285.475 259.745
+   L286.469 263.454
+   L287.708 267.204
+   L292.503 280.403
+   L293.373 284.08
+   L293.867 287.683
+   L294.062 291.225
+   L294.234 298.243
+   L294.569 301.786
+   L295.217 305.379
+   L296.182 309.027
+   L297.398 312.718
+   L300.868 322.002
+   L302.832 327.518
+   L305.154 334.755
+   L307.421 341.891
+   L309.356 347.223
+   L311.625 352.56
+   L314.207 357.873
+   L317.015 363.093
+   L319.014 366.468
+   L321.181 369.718
+   L323.634 372.784
+   L325.025 374.22
+   L326.565 375.564
+   L328.309 376.756
+   L330.311 377.742
+   L332.589 378.451
+   L335.062 378.775
+   L337.559 378.647
+   L339.884 378.124
+   L341.933 377.288
+   L343.719 376.211
+   L345.295 374.978
+   L346.706 373.646
+   L347.981 372.24
+   L350.211 369.275
+   L352.128 366.17
+   L354.686 361.313
+   L365.92 338.379
+   L367.388 334.817
+   L369.295 329.526
+   L371.76 322.442
+   L373.213 318.823
+   L374.882 315.14
+   L381.133 302.112
+   L382.526 298.486
+   L383.661 294.924
+   L385.06 289.658
+   L386.449 284.396
+   L387.536 280.849
+   L389.492 275.449
+   L392.498 268.158
+   L395.437 260.907
+   L397.38 255.56
+   L399.653 248.563
+   L402.885 238.259
+   L404.123 234.825
+   L405.558 231.359
+   L407.242 227.842
+   L409.184 224.268
+   L412.476 218.833
+   L421.62 204.671
+   L424.914 199.74
+   L427.204 196.582
+   L429.681 193.514
+   L432.432 190.524
+   L435.513 187.619
+   L438.931 184.836
+   L442.637 182.27
+   L444.57 181.116
+   L446.537 180.082
+   L448.523 179.199
+   L450.517 178.493
+   L452.509 177.985
+   L454.498 177.688
+   L456.483 177.602
+   L458.465 177.717
+   L460.447 178.014
+   L462.43 178.472
+   L466.4 179.772
+   L470.367 181.446
+   L474.31 183.351
+   L480.139 186.426
+   L491.511 192.765
+   L503.044 199.146
+   L508.96 202.199
+   L508.96 202.199" style="fill:none;stroke:#ff0000;stroke-linecap:square;stroke-width:6;"/>
       </g>
       <g id="line2d_5">
        <path clip-path="url(#p5a67343740)" d="
-   M521.1 409.359
-   L531.692 405.589
-   L522.158 401.563" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
+   M520.98 406.73
+   L531.692 403.217
+   L520.793 398.684" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
       </g>
       <g id="line2d_6">
        <path clip-path="url(#p5a67343740)" d="
-   M60.8646 24.5825
-   L67.7483 18.7826
-   L75.1009 24.0029" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
+   M57.3155 24.6484
+   L63.73 18.7826
+   L72.0094 24.7505" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
       </g>
       <g id="text_1">
        <!-- x label -->
@@ -3714,67 +3724,67 @@ interpreted as body elements.</p>
    L411.798 18
    L411.899 18
    L412.001 18
-   L412.102 17.9999
-   L412.203 17.9999
-   L412.304 17.9999
-   L412.406 17.9998
-   L412.507 17.9998
-   L412.608 17.9997
-   L412.71 17.9996
-   L412.811 17.9995
-   L412.912 17.9993
-   L413.014 17.9991
-   L413.115 17.9989
-   L413.216 17.9986
-   L413.318 17.9983
-   L413.419 17.9979
-   L413.52 17.9974
-   L413.621 17.9969
-   L413.723 17.9963
-   L413.824 17.9956
-   L413.925 17.9949
-   L414.027 17.994
-   L414.128 17.9931
-   L414.229 17.9921
-   L414.331 17.991
-   L414.432 17.9898
-   L414.533 17.9885
-   L414.635 17.9872
-   L414.736 17.9858
-   L414.837 17.9843
-   L414.938 17.9828
-   L415.04 17.9813
-   L415.141 17.9797
-   L415.242 17.9781
-   L415.344 17.9765
-   L415.445 17.9749
-   L415.546 17.9734
-   L415.648 17.9719
-   L415.749 17.9704
-   L415.85 17.9691
-   L415.952 17.9678
-   L416.053 17.9666
-   L416.154 17.9656
-   L416.255 17.9647
-   L416.357 17.9639
-   L416.458 17.9633
-   L416.559 17.9628
-   L416.661 17.9625
-   L416.762 17.9623
-   L416.863 17.9624
-   L416.965 17.9625
-   L417.066 17.9628
-   L417.167 17.9633
-   L417.269 17.9639
-   L417.37 17.9646
-   L417.471 17.9654
-   L417.572 17.9664
-   L417.674 17.9674
-   L417.775 17.9684
-   L417.876 17.9695
-   L417.978 17.9706
-   L418.079 17.9716
-   L418.18 17.9727" style="fill:none;stroke:#0000ff;stroke-linecap:square;stroke-width:6;"/>
+   L412.102 18
+   L412.203 18
+   L412.304 18
+   L412.406 18
+   L412.507 18
+   L412.608 18
+   L412.71 18
+   L412.811 18.0001
+   L412.912 18.0001
+   L413.014 18.0001
+   L413.115 18.0002
+   L413.216 18.0002
+   L413.318 18.0003
+   L413.419 18.0004
+   L413.52 18.0005
+   L413.621 18.0006
+   L413.723 18.0007
+   L413.824 18.0009
+   L413.925 18.0011
+   L414.027 18.0014
+   L414.128 18.0016
+   L414.229 18.002
+   L414.331 18.0023
+   L414.432 18.0027
+   L414.533 18.0032
+   L414.635 18.0037
+   L414.736 18.0043
+   L414.837 18.0049
+   L414.938 18.0056
+   L415.04 18.0064
+   L415.141 18.0072
+   L415.242 18.0081
+   L415.344 18.009
+   L415.445 18.01
+   L415.546 18.0111
+   L415.648 18.0122
+   L415.749 18.0134
+   L415.85 18.0146
+   L415.952 18.0158
+   L416.053 18.0171
+   L416.154 18.0184
+   L416.255 18.0197
+   L416.357 18.021
+   L416.458 18.0223
+   L416.559 18.0237
+   L416.661 18.0249
+   L416.762 18.0262
+   L416.863 18.0274
+   L416.965 18.0286
+   L417.066 18.0297
+   L417.167 18.0307
+   L417.269 18.0317
+   L417.37 18.0325
+   L417.471 18.0333
+   L417.572 18.0339
+   L417.674 18.0344
+   L417.775 18.0348
+   L417.876 18.035
+   L417.978 18.0351
+   L418.079 18.0351
+   L418.18 18.0349" style="fill:none;stroke:#0000ff;stroke-linecap:square;stroke-width:6;"/>
        </g>
        <g id="line2d_8"/>
        <g id="text_4">
@@ -4317,68 +4327,68 @@ interpreted as body elements.</p>
    L411.697 38.7175
    L411.798 38.7175
    L411.899 38.7175
-   L412.001 38.7176
-   L412.102 38.7176
-   L412.203 38.7176
-   L412.304 38.7177
-   L412.406 38.7178
-   L412.507 38.7179
-   L412.608 38.718
-   L412.71 38.7182
-   L412.811 38.7184
-   L412.912 38.7186
-   L413.014 38.7189
-   L413.115 38.7193
-   L413.216 38.7197
-   L413.318 38.7202
-   L413.419 38.7207
-   L413.52 38.7213
-   L413.621 38.7221
-   L413.723 38.7229
-   L413.824 38.7237
-   L413.925 38.7247
-   L414.027 38.7258
-   L414.128 38.7269
-   L414.229 38.7281
-   L414.331 38.7294
-   L414.432 38.7308
-   L414.533 38.7322
-   L414.635 38.7336
-   L414.736 38.7351
-   L414.837 38.7365
-   L414.938 38.738
-   L415.04 38.7395
-   L415.141 38.7409
-   L415.242 38.7423
-   L415.344 38.7436
-   L415.445 38.7448
-   L415.546 38.7459
-   L415.648 38.747
-   L415.749 38.7479
-   L415.85 38.7487
-   L415.952 38.7494
-   L416.053 38.7499
-   L416.154 38.7504
-   L416.255 38.7507
-   L416.357 38.7509
-   L416.458 38.751
-   L416.559 38.751
-   L416.661 38.751
-   L416.762 38.7509
-   L416.863 38.7507
-   L416.965 38.7505
-   L417.066 38.7503
-   L417.167 38.7501
-   L417.269 38.7498
-   L417.37 38.7496
-   L417.471 38.7495
-   L417.572 38.7493
-   L417.674 38.7492
-   L417.775 38.7492
-   L417.876 38.7492
-   L417.978 38.7492
-   L418.079 38.7492
-   L418.18 38.7493" style="fill:none;stroke:#ff0000;stroke-linecap:square;stroke-width:6;"/>
+   L412.001 38.7175
+   L412.102 38.7175
+   L412.203 38.7175
+   L412.304 38.7175
+   L412.406 38.7176
+   L412.507 38.7176
+   L412.608 38.7176
+   L412.71 38.7176
+   L412.811 38.7177
+   L412.912 38.7177
+   L413.014 38.7177
+   L413.115 38.7178
+   L413.216 38.7178
+   L413.318 38.7179
+   L413.419 38.718
+   L413.52 38.7181
+   L413.621 38.7181
+   L413.723 38.7182
+   L413.824 38.7184
+   L413.925 38.7185
+   L414.027 38.7186
+   L414.128 38.7188
+   L414.229 38.719
+   L414.331 38.7192
+   L414.432 38.7194
+   L414.533 38.7196
+   L414.635 38.7199
+   L414.736 38.7202
+   L414.837 38.7205
+   L414.938 38.7209
+   L415.04 38.7213
+   L415.141 38.7217
+   L415.242 38.7222
+   L415.344 38.7227
+   L415.445 38.7232
+   L415.546 38.7238
+   L415.648 38.7243
+   L415.749 38.7249
+   L415.85 38.7255
+   L415.952 38.7261
+   L416.053 38.7267
+   L416.154 38.7273
+   L416.255 38.7279
+   L416.357 38.7284
+   L416.458 38.7288
+   L416.559 38.7291
+   L416.661 38.7293
+   L416.762 38.7295
+   L416.863 38.7294
+   L416.965 38.7293
+   L417.066 38.7289
+   L417.167 38.7284
+   L417.269 38.7277
+   L417.37 38.7268
+   L417.471 38.7256
+   L417.572 38.7243
+   L417.674 38.7227
+   L417.775 38.7209
+   L417.876 38.7189
+   L417.978 38.7167
+   L418.079 38.7144
+   L418.18 38.7119" style="fill:none;stroke:#ff0000;stroke-linecap:square;stroke-width:6;"/>
        </g>
        <g id="line2d_10"/>
        <g id="text_5">
@@ -4410,13 +4420,13 @@ interpreted as body elements.</p>
    </svg>
 
 </div>
-</section>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Two columns</h2>
-<div class="columns"><div class="left">
+    <section>
+        <h2>Two columns</h2>
+            <div class="columns"><div class="left">
 <div class="align-center">
    <svg class="align-center" width=100% viewBox="0 0 576 432" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg >"
     <defs>
@@ -4438,469 +4448,470 @@ interpreted as body elements.</p>
       <g id="line2d_1">
        <path clip-path="url(#p5a67343740)" d="
    M44.3077 403.826
-   L75.4647 403.905
-   L86.5922 404.158
-   L97.7197 404.436
-   L104.396 404.397
-   L111.073 404.134
-   L126.651 403.365
-   L137.779 403.212
-   L155.583 403.147
-   L162.259 403.356
-   L180.063 404.068
-   L188.965 404.111
-   L197.867 403.934
-   L206.769 403.488
-   L220.122 402.737
-   L229.024 402.555
-   L251.279 402.477
-   L257.956 402.627
-   L266.858 403.068
-   L282.436 403.933
-   L291.338 404.18
-   L302.466 404.242
-   L315.819 404.069
-   L342.525 403.476
-   L349.201 403.699
-   L369.231 404.632
-   L373.682 404.562
-   L378.133 404.319
-   L384.809 403.707
-   L393.711 402.897
-   L398.162 402.719
-   L402.613 402.761
-   L407.064 403.002
-   L424.868 404.359
-   L429.319 404.446
-   L433.77 404.375
-   L440.447 404.009
-   L458.251 402.731
-   L464.927 402.657
-   L471.604 402.852
-   L482.731 403.491
-   L500.535 404.639
-   L504.986 404.755
-   L509.437 404.706
-   L513.888 404.484
-   L520.565 403.917
-   L529.467 403.137
-   L531.692 402.994
-   L531.692 402.994" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2.0;"/>
+   L106.622 403.92
+   L119.975 404.106
+   L126.651 403.999
+   L144.455 403.497
+   L148.906 403.616
+   L155.583 404.066
+   L166.71 404.969
+   L171.161 405.139
+   L175.612 405.13
+   L182.289 404.818
+   L197.867 403.822
+   L204.544 403.778
+   L211.22 404.023
+   L229.024 404.909
+   L235.701 404.96
+   L242.377 404.776
+   L249.054 404.352
+   L255.73 403.719
+   L273.534 401.869
+   L280.211 401.551
+   L286.887 401.555
+   L293.564 401.801
+   L306.917 402.574
+   L340.299 404.657
+   L349.201 404.948
+   L355.878 404.942
+   L362.554 404.722
+   L387.035 403.644
+   L400.388 403.454
+   L411.515 403.499
+   L418.192 403.709
+   L424.868 404.128
+   L440.447 405.36
+   L447.123 405.546
+   L453.8 405.409
+   L460.476 404.995
+   L469.378 404.148
+   L478.28 403.266
+   L484.957 402.86
+   L489.408 402.789
+   L493.859 402.883
+   L500.535 403.277
+   L509.437 404.085
+   L518.339 404.891
+   L522.79 405.153
+   L527.241 405.251
+   L531.692 405.158
+   L531.692 405.158" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2.0;"/>
       </g>
       <g id="line2d_2">
        <path clip-path="url(#p5a67343740)" d="
    M66.4615 413.217
-   L66.3803 377.187
-   L66.1387 373.395
-   L65.7319 369.602
-   L64.8418 363.913
-   L63.5568 356.328
-   L63.1264 352.535
-   L62.9461 348.742
-   L63.0211 344.95
-   L63.4706 339.261
-   L64.1703 331.676
-   L64.4566 325.987
-   L64.5654 316.505
-   L64.7403 310.816
-   L65.2016 305.127
-   L65.9364 299.438
-   L67.2229 289.957
-   L67.5381 286.164
-   L67.6649 282.371
-   L67.6005 278.579
-   L67.217 272.89
-   L65.6921 255.823
-   L65.4967 250.134
-   L65.529 244.445
-   L65.7732 238.756
-   L66.3368 231.171
-   L67.017 221.689
-   L67.1212 216
-   L66.9981 212.207
-   L66.5578 206.518
-   L65.5234 195.14
-   L65.4128 191.348
-   L65.5068 187.555
-   L65.8078 183.763
-   L66.5584 178.074
-   L67.9105 168.592
-   L68.2143 164.799
-   L68.2887 161.007
-   L68.1276 157.214
-   L67.7697 153.421
-   L66.1738 140.147
-   L66.006 136.355
-   L66.0984 132.562
-   L66.4688 128.769
-   L67.0827 124.977
-   L69.3128 113.599
-   L69.7393 109.806
-   L69.8495 106.013
-   L69.6333 102.221
-   L69.1356 98.4281
-   L68.0387 92.7391
-   L65.6583 81.3612
-   L65.074 77.5686
-   L64.6823 73.7759
-   L64.509 69.9833
-   L64.5501 66.1906
-   L64.9228 60.5017
-   L65.8854 49.1237
-   L66.0932 43.4348
-   L66.0942 35.8495
-   L66.0827 26.3679
-   L66.2819 18.7826
-   L66.2819 18.7826" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2.0;"/>
+   L66.3784 392.358
+   L66.1375 384.773
+   L65.4632 373.395
+   L65.1478 365.809
+   L65.1492 358.224
+   L65.2684 346.846
+   L65.189 331.676
+   L65.4912 325.987
+   L66.7162 310.816
+   L66.7244 307.023
+   L66.5255 303.231
+   L65.9221 297.542
+   L64.7901 288.06
+   L64.5281 284.268
+   L64.4474 280.475
+   L64.5652 276.682
+   L64.8831 272.89
+   L65.3847 269.097
+   L66.3811 263.408
+   L67.7227 255.823
+   L68.193 252.03
+   L68.468 248.237
+   L68.5812 242.548
+   L68.4511 231.171
+   L68.2029 225.482
+   L67.8426 221.689
+   L67.3054 217.896
+   L65.1213 204.622
+   L64.8093 200.829
+   L64.7321 197.037
+   L64.8827 193.244
+   L65.2274 189.452
+   L66.2495 181.866
+   L66.9507 176.177
+   L67.2096 172.385
+   L67.2405 168.592
+   L67.0597 164.799
+   L66.0525 151.525
+   L65.9553 145.836
+   L66.0599 124.977
+   L66.4305 121.184
+   L67.3153 115.495
+   L68.2264 109.806
+   L68.5841 106.013
+   L68.6138 102.221
+   L68.3062 98.4281
+   L67.7477 94.6355
+   L66.5043 87.0502
+   L66.1169 83.2575
+   L65.9842 79.4649
+   L66.0802 75.6722
+   L66.6048 68.087
+   L67.0669 60.5017
+   L67.6363 51.0201
+   L68.2149 45.3311
+   L69.0414 37.7458
+   L69.262 33.9532
+   L69.2399 30.1605
+   L68.9467 26.3679
+   L68.412 22.5753
+   L67.7113 18.7826
+   L67.7113 18.7826" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2.0;"/>
       </g>
       <g id="line2d_3">
        <path clip-path="url(#p5a67343740)" d="
    M66.4615 216
    L68.5024 215.257
    L70.5135 214.459
-   L74.4427 212.703
-   L78.2416 210.752
-   L81.9078 208.627
-   L85.4427 206.349
-   L88.849 203.944
-   L93.7182 200.154
-   L98.291 196.22
-   L102.569 192.209
-   L107.955 186.743
-   L126.595 167.246
-   L133.474 160.348
-   L136.123 157.937
-   L138.869 155.738
-   L141.872 153.757
-   L143.526 152.852
-   L145.312 152.011
-   L147.254 151.241
-   L149.369 150.552
-   L151.668 149.957
-   L154.146 149.472
-   L156.769 149.114
-   L159.466 148.901
-   L162.135 148.855
-   L164.67 148.997
-   L166.996 149.34
-   L169.085 149.888
-   L170.95 150.629
-   L172.622 151.54
-   L174.139 152.6
-   L175.537 153.786
-   L178.089 156.453
-   L180.43 159.412
-   L182.624 162.561
-   L184.672 165.824
-   L186.547 169.146
-   L188.221 172.494
-   L189.7 175.854
-   L191.659 180.934
-   L194.257 187.881
-   L196.538 193.277
-   L199.146 198.809
-   L203.582 208.115
-   L205.143 211.8
-   L206.517 215.45
-   L208.28 220.874
-   L211.585 231.736
-   L213.511 237.253
-   L218.268 250.22
-   L219.957 255.717
-   L221.337 261.158
-   L222.847 268.356
-   L225.363 280.947
-   L227.517 290.018
-   L229.2 297.265
-   L230.601 304.447
-   L231.988 311.615
-   L233.307 317.037
-   L234.929 322.514
-   L240.336 338.982
-   L243.458 348.087
-   L247.446 358.967
-   L249.582 364.384
-   L252.007 369.826
-   L254.775 375.305
-   L260.656 386.096
-   L264.446 392.762
-   L266.469 395.785
-   L267.59 397.179
-   L268.828 398.467
-   L270.259 399.592
-   L271.975 400.491
-   L274.056 401.092
-   L276.511 401.279
-   L279.183 401.009
-   L281.768 400.372
-   L284.061 399.461
-   L286.017 398.331
-   L287.684 397.041
-   L289.136 395.665
-   L290.413 394.231
-   L291.543 392.746
-   L293.46 389.671
-   L295.033 386.491
-   L296.368 383.231
-   L298.09 378.23
-   L300.093 371.395
-   L305.491 351.881
-   L308.457 342.722
-   L311.425 333.515
-   L314.336 324.286
-   L316.378 318.678
-   L318.754 313
-   L323.748 301.59
-   L325.135 297.838
-   L326.243 294.136
-   L327.045 290.49
-   L327.58 286.891
-   L329.003 274.366
-   L330.079 268.909
-   L332.46 257.956
-   L335.178 243.456
-   L336.214 239.769
-   L338.131 234.174
-   L340.824 226.695
-   L341.968 222.999
-   L343.351 217.527
-   L345.105 210.268
-   L346.253 206.592
-   L347.676 202.864
-   L350.194 197.198
-   L352.754 191.531
-   L354.244 187.807
-   L355.47 184.15
-   L356.445 180.564
-   L359.84 166.541
-   L361.039 163.01
-   L362.43 159.456
-   L364.785 154.113
-   L368.197 147.061
-   L370.905 141.896
-   L372.837 138.529
-   L374.951 135.228
-   L377.335 131.995
-   L380.084 128.843
-   L381.62 127.305
-   L383.276 125.807
-   L385.052 124.361
-   L386.94 122.993
-   L388.916 121.75
-   L390.946 120.693
-   L392.954 119.904
-   L394.882 119.476
-   L396.706 119.438
-   L398.406 119.769
-   L400.01 120.409
-   L401.541 121.285
-   L403.014 122.341
-   L405.87 124.841
-   L408.671 127.692
-   L412.824 132.34
-   L416.788 137.155
-   L420.359 141.93
-   L423.515 146.612
-   L430.784 157.743
-   L434.396 162.777
-   L440.888 171.336
-   L446.33 178.21
-   L452.104 185.13
-   L460.991 195.292
-   L466.628 201.505
-   L470.869 205.827
-   L473.84 208.586
-   L476.976 211.253
-   L480.278 213.8
-   L483.728 216.174
-   L487.316 218.319
-   L491.053 220.198
-   L494.956 221.805
-   L499.025 223.155
-   L503.23 224.257
-   L507.522 225.103
-   L509.686 225.423
-   L509.686 225.423" style="fill:none;stroke:#0000ff;stroke-linecap:square;stroke-width:6;"/>
+   L74.4424 212.704
+   L78.2402 210.754
+   L81.9031 208.632
+   L85.4308 206.362
+   L88.826 203.966
+   L93.685 200.183
+   L98.3056 196.208
+   L102.765 192.062
+   L108.593 186.293
+   L115.722 178.879
+   L129.372 164.392
+   L133.83 160.075
+   L138.622 155.826
+   L141.975 153.136
+   L145.445 150.682
+   L147.235 149.586
+   L149.073 148.605
+   L150.973 147.765
+   L152.952 147.097
+   L155.023 146.631
+   L157.192 146.402
+   L159.448 146.429
+   L161.752 146.719
+   L164.053 147.256
+   L166.289 148.004
+   L168.412 148.929
+   L170.397 149.992
+   L172.233 151.162
+   L173.924 152.417
+   L175.479 153.741
+   L178.233 156.543
+   L180.601 159.505
+   L182.681 162.589
+   L184.552 165.772
+   L187.114 170.703
+   L195.588 188.279
+   L198.054 193.706
+   L200.218 199.098
+   L202.765 206.266
+   L206.029 215.333
+   L216.432 242.994
+   L217.524 246.641
+   L218.379 250.243
+   L219.003 253.802
+   L220.834 266.221
+   L221.733 269.854
+   L222.858 273.533
+   L226.107 282.824
+   L227.944 288.377
+   L230.109 295.723
+   L233.567 308.501
+   L236.992 321.241
+   L238.699 326.737
+   L244.112 343.215
+   L246.067 350.378
+   L249.754 364.43
+   L251.435 369.66
+   L252.761 373.155
+   L254.305 376.669
+   L256.109 380.211
+   L258.186 383.785
+   L260.524 387.382
+   L263.091 390.977
+   L265.843 394.529
+   L268.761 397.958
+   L271.838 401.132
+   L273.467 402.492
+   L275.156 403.557
+   L276.815 404.102
+   L278.512 403.91
+   L280.288 403.087
+   L282.028 401.842
+   L283.721 400.342
+   L286.989 397.019
+   L290.052 393.506
+   L292.892 389.92
+   L295.441 386.332
+   L297.629 382.783
+   L299.416 379.296
+   L300.813 375.86
+   L301.9 372.452
+   L303.661 365.596
+   L305.129 360.315
+   L306.319 356.712
+   L308.403 351.204
+   L314.284 336.342
+   L316.076 330.828
+   L317.502 325.374
+   L318.629 319.965
+   L321.737 303.717
+   L323.445 296.409
+   L324.929 290.884
+   L327.154 283.468
+   L330.51 272.335
+   L332.435 264.97
+   L334.993 253.984
+   L337.79 241.217
+   L339.125 233.984
+   L339.911 228.611
+   L341.56 216.157
+   L342.34 212.552
+   L343.372 208.904
+   L345.29 203.366
+   L347.932 195.986
+   L349.61 190.54
+   L352.276 181.554
+   L353.61 177.923
+   L355.195 174.244
+   L357.018 170.52
+   L360.057 164.876
+   L366.188 153.675
+   L370.69 144.739
+   L373.354 139.587
+   L375.251 136.241
+   L377.305 132.986
+   L379.56 129.867
+   L382.08 126.966
+   L383.474 125.64
+   L384.984 124.429
+   L386.634 123.369
+   L388.452 122.514
+   L390.461 121.913
+   L392.643 121.615
+   L394.952 121.652
+   L397.307 121.999
+   L399.617 122.614
+   L401.828 123.444
+   L403.917 124.434
+   L405.882 125.546
+   L407.731 126.751
+   L411.13 129.357
+   L414.206 132.145
+   L417.037 135.054
+   L419.684 138.05
+   L423.415 142.667
+   L428.152 149.004
+   L436.35 160.472
+   L440.822 167.009
+   L444.82 173.297
+   L450.489 182.361
+   L453.717 186.93
+   L457.311 191.542
+   L462.32 197.491
+   L466.021 201.557
+   L468.518 204.039
+   L471.159 206.37
+   L474.063 208.603
+   L477.317 210.792
+   L480.951 212.967
+   L484.939 215.127
+   L489.21 217.243
+   L493.677 219.272
+   L498.246 221.162
+   L502.832 222.861
+   L507.374 224.312
+   L509.615 224.926
+   L509.615 224.926" style="fill:none;stroke:#0000ff;stroke-linecap:square;stroke-width:6;"/>
       </g>
       <g id="line2d_4">
        <path clip-path="url(#p5a67343740)" d="
    M66.4615 231.418
-   L74.7278 234.194
-   L81.0249 236.052
-   L85.2947 237.097
-   L89.6317 237.915
-   L94.0332 238.429
-   L98.4792 238.557
-   L100.706 238.451
-   L102.926 238.221
-   L105.131 237.863
-   L107.31 237.375
-   L109.454 236.76
-   L111.556 236.023
-   L113.607 235.172
-   L117.543 233.165
-   L121.245 230.82
-   L124.722 228.209
-   L128 225.389
-   L131.105 222.408
-   L134.054 219.307
-   L136.84 216.128
-   L139.436 212.911
-   L141.806 209.688
-   L143.927 206.48
-   L145.808 203.288
-   L148.301 198.488
-   L154.953 185.072
-   L163.319 169.101
-   L166.639 162.039
-   L168.89 156.791
-   L171.594 149.864
-   L174.882 141.215
-   L177.115 135.946
-   L180.434 128.83
-   L185.384 118.235
-   L193.651 99.7046
-   L195.364 96.4416
-   L197.267 93.201
-   L199.411 89.9856
-   L201.84 86.8093
-   L204.601 83.7082
-   L206.122 82.205
-   L207.751 80.753
-   L209.497 79.3693
-   L211.376 78.0876
-   L213.405 76.9657
-   L215.586 76.0676
-   L217.857 75.4953
-   L220.117 75.3662
-   L222.264 75.6958
-   L224.21 76.4188
-   L225.947 77.4497
-   L227.517 78.6905
-   L228.951 80.0613
-   L230.271 81.5286
-   L232.648 84.651
-   L234.751 87.9255
-   L236.64 91.2927
-   L239.193 96.4594
-   L241.546 101.734
-   L243.728 107.074
-   L245.023 110.636
-   L246.134 114.181
-   L247.046 117.705
-   L249.929 130.151
-   L251.188 133.842
-   L252.754 137.608
-   L255.522 143.351
-   L260.279 152.958
-   L262.816 158.663
-   L265.096 164.323
-   L267.146 169.947
-   L268.901 175.522
-   L269.86 179.206
-   L270.982 184.68
-   L272.112 191.928
-   L273.559 201.011
-   L278.589 228.445
-   L279.864 233.982
-   L281.449 239.571
-   L284.805 250.779
-   L285.68 254.472
-   L286.368 258.131
-   L287.149 263.573
-   L288.205 270.822
-   L288.926 274.476
-   L290.305 280.004
-   L293.029 289.281
-   L295.684 298.523
-   L299.816 313.217
-   L302.173 320.581
-   L305.403 329.794
-   L309.473 340.789
-   L311.683 346.27
-   L314.158 351.768
-   L316.976 357.305
-   L320.111 362.866
-   L324.553 370.204
-   L327.955 375.457
-   L330.3 378.691
-   L331.491 380.163
-   L332.727 381.415
-   L334.005 382.306
-   L335.266 382.622
-   L336.646 382.219
-   L338.191 381.265
-   L339.76 379.968
-   L342.852 376.918
-   L345.722 373.641
-   L348.404 370.224
-   L352.271 364.9
-   L357.277 357.596
-   L360.719 352.112
-   L362.749 348.501
-   L364.533 344.937
-   L366.07 341.42
-   L367.381 337.941
-   L369.021 332.77
-   L372.559 320.614
-   L374.467 315.251
-   L376.679 309.793
-   L379.927 302.425
-   L384.87 291.342
-   L387.073 285.868
-   L388.922 280.487
-   L390.419 275.205
-   L392.776 266.465
-   L393.986 262.911
-   L395.465 259.292
-   L397.2 255.61
-   L403.693 242.664
-   L405.21 239.09
-   L407.161 233.864
-   L409.686 227.02
-   L411.134 223.589
-   L413.632 218.405
-   L416.432 213.216
-   L420.366 206.437
-   L423.397 201.561
-   L425.516 198.434
-   L427.787 195.412
-   L430.282 192.506
-   L433.06 189.738
-   L436.17 187.153
-   L437.86 185.953
-   L439.644 184.829
-   L441.524 183.795
-   L443.5 182.864
-   L445.564 182.049
-   L447.706 181.361
-   L449.906 180.81
-   L452.141 180.4
-   L454.385 180.132
-   L456.61 180.004
-   L458.799 180.01
-   L460.939 180.144
-   L463.025 180.4
-   L465.061 180.771
-   L469.014 181.837
-   L472.883 183.293
-   L476.741 185.077
-   L482.562 188.172
-   L496.064 195.889
-   L510.1 203.904
-   L510.1 203.904" style="fill:none;stroke:#ff0000;stroke-linecap:square;stroke-width:6;"/>
+   L74.7277 234.194
+   L81.0239 236.049
+   L85.2919 237.088
+   L89.6266 237.891
+   L94.0278 238.38
+   L98.4808 238.473
+   L100.716 238.348
+   L102.947 238.101
+   L105.164 237.73
+   L107.356 237.237
+   L109.512 236.625
+   L111.618 235.903
+   L113.664 235.078
+   L117.549 233.158
+   L121.133 230.935
+   L124.427 228.465
+   L127.469 225.791
+   L130.302 222.951
+   L132.958 219.979
+   L135.456 216.908
+   L138.946 212.162
+   L142.235 207.265
+   L153.435 189.814
+   L156.527 184.502
+   L158.297 181.032
+   L159.798 177.63
+   L161.046 174.289
+   L162.589 169.343
+   L164.576 162.705
+   L165.775 159.3
+   L167.183 155.819
+   L169.63 150.484
+   L175.558 137.958
+   L179.322 129.188
+   L183.815 118.763
+   L186.288 113.54
+   L189.053 108.275
+   L192.155 102.962
+   L195.566 97.6234
+   L199.244 92.2969
+   L203.184 87.0275
+   L205.965 83.5826
+   L208.87 80.2485
+   L211.897 77.1382
+   L213.444 75.7304
+   L215.008 74.5089
+   L216.605 73.5821
+   L218.196 73.0992
+   L219.815 73.2216
+   L221.529 73.9224
+   L223.272 75.049
+   L225.002 76.4474
+   L228.314 79.5987
+   L231.266 82.9338
+   L233.839 86.3256
+   L236.057 89.7434
+   L237.993 93.1802
+   L240.563 98.399
+   L244.592 107.323
+   L247.73 114.601
+   L249.145 118.235
+   L250.378 121.846
+   L251.421 125.43
+   L254.766 138.04
+   L256.06 141.743
+   L258.304 147.372
+   L260.537 153.009
+   L261.804 156.728
+   L262.826 160.405
+   L263.633 164.046
+   L265.771 174.949
+   L266.702 178.633
+   L268.4 184.218
+   L272.101 195.456
+   L273.09 199.162
+   L273.849 202.83
+   L274.385 206.462
+   L275.886 219.12
+   L276.689 222.802
+   L277.738 226.527
+   L280.228 234.044
+   L281.965 239.66
+   L282.894 243.364
+   L283.603 247.03
+   L284.111 250.66
+   L284.622 256.059
+   L285.129 261.452
+   L285.662 265.079
+   L286.458 268.749
+   L287.533 272.465
+   L289.506 278.101
+   L292.138 285.609
+   L293.762 291.169
+   L299.98 314.973
+   L300.866 320.298
+   L302.118 329.035
+   L302.871 332.547
+   L303.885 336.096
+   L305.172 339.686
+   L306.708 343.314
+   L309.375 348.8
+   L313.302 356.104
+   L318.32 364.927
+   L320.393 368.261
+   L322.63 371.429
+   L323.86 372.924
+   L325.199 374.343
+   L326.68 375.66
+   L328.362 376.814
+   L330.311 377.742
+   L332.56 378.373
+   L335.054 378.606
+   L337.624 378.391
+   L340.059 377.799
+   L342.234 376.917
+   L344.141 375.811
+   L345.822 374.559
+   L347.319 373.221
+   L348.653 371.823
+   L349.838 370.384
+   L350.887 368.92
+   L352.611 365.946
+   L353.912 362.933
+   L354.915 359.876
+   L357.772 350.152
+   L359.133 346.66
+   L360.761 343.057
+   L367.814 328.347
+   L369.918 322.945
+   L375.843 306.754
+   L381.42 292.234
+   L384.199 284.98
+   L386.547 279.476
+   L389.238 273.89
+   L393.254 266.337
+   L397.287 258.791
+   L399.99 253.232
+   L402.327 247.791
+   L404.368 242.464
+   L406.746 235.527
+   L411.006 222.192
+   L412.426 218.852
+   L414.177 215.445
+   L416.264 211.964
+   L419.843 206.67
+   L425.977 198.184
+   L429.464 193.651
+   L431.866 190.933
+   L434.524 188.459
+   L436.001 187.311
+   L437.6 186.224
+   L439.331 185.2
+   L441.194 184.247
+   L443.186 183.376
+   L445.292 182.599
+   L447.488 181.937
+   L449.749 181.406
+   L452.046 181.026
+   L454.353 180.809
+   L456.651 180.762
+   L458.926 180.883
+   L461.174 181.163
+   L463.391 181.586
+   L467.732 182.789
+   L471.948 184.339
+   L476.034 186.099
+   L481.915 188.927
+   L491.187 193.744
+   L506.153 201.81
+   L510.154 203.984
+   L510.154 203.984" style="fill:none;stroke:#ff0000;stroke-linecap:square;stroke-width:6;"/>
       </g>
       <g id="line2d_5">
        <path clip-path="url(#p5a67343740)" d="
-   M520.062 406.768
-   L531.692 402.994
-   L521.327 400.608" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
+   M523.845 407.372
+   L531.692 405.158
+   L519.078 402.359" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
       </g>
       <g id="line2d_6">
        <path clip-path="url(#p5a67343740)" d="
-   M59.3885 25.1507
-   L66.2819 18.7826
-   L70.6382 24.4579" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
+   M63.6671 23.0793
+   L67.7113 18.7826
+   L72.822 25.6895" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-width:2;"/>
       </g>
       <g id="text_1">
        <!-- x label -->
@@ -6227,69 +6238,69 @@ interpreted as body elements.</p>
    L411.595 18
    L411.697 18
    L411.798 18
-   L411.899 17.9999
-   L412.001 17.9999
-   L412.102 17.9999
-   L412.203 17.9998
-   L412.304 17.9998
-   L412.406 17.9997
-   L412.507 17.9996
-   L412.608 17.9994
-   L412.71 17.9993
-   L412.811 17.9991
-   L412.912 17.9988
-   L413.014 17.9985
-   L413.115 17.9981
-   L413.216 17.9976
-   L413.318 17.9971
-   L413.419 17.9965
-   L413.52 17.9958
-   L413.621 17.995
-   L413.723 17.9942
-   L413.824 17.9932
-   L413.925 17.9921
-   L414.027 17.9909
-   L414.128 17.9897
-   L414.229 17.9883
-   L414.331 17.9868
-   L414.432 17.9853
-   L414.533 17.9837
-   L414.635 17.9821
-   L414.736 17.9804
-   L414.837 17.9787
-   L414.938 17.977
-   L415.04 17.9753
-   L415.141 17.9736
-   L415.242 17.972
-   L415.344 17.9705
-   L415.445 17.969
-   L415.546 17.9677
-   L415.648 17.9665
-   L415.749 17.9654
-   L415.85 17.9645
-   L415.952 17.9637
-   L416.053 17.9631
-   L416.154 17.9627
-   L416.255 17.9624
-   L416.357 17.9623
-   L416.458 17.9624
-   L416.559 17.9626
-   L416.661 17.9629
-   L416.762 17.9634
-   L416.863 17.964
-   L416.965 17.9647
-   L417.066 17.9655
-   L417.167 17.9664
-   L417.269 17.9673
-   L417.37 17.9683
-   L417.471 17.9693
-   L417.572 17.9703
-   L417.674 17.9714
-   L417.775 17.9724
-   L417.876 17.9735
-   L417.978 17.9745
-   L418.079 17.9756
-   L418.18 17.9767" style="fill:none;stroke:#0000ff;stroke-linecap:square;stroke-width:6;"/>
+   L411.899 18
+   L412.001 18
+   L412.102 18
+   L412.203 18
+   L412.304 18.0001
+   L412.406 18.0001
+   L412.507 18.0001
+   L412.608 18.0002
+   L412.71 18.0002
+   L412.811 18.0003
+   L412.912 18.0004
+   L413.014 18.0005
+   L413.115 18.0007
+   L413.216 18.0008
+   L413.318 18.001
+   L413.419 18.0013
+   L413.52 18.0016
+   L413.621 18.0019
+   L413.723 18.0023
+   L413.824 18.0027
+   L413.925 18.0032
+   L414.027 18.0037
+   L414.128 18.0043
+   L414.229 18.0049
+   L414.331 18.0056
+   L414.432 18.0063
+   L414.533 18.007
+   L414.635 18.0078
+   L414.736 18.0085
+   L414.837 18.0093
+   L414.938 18.01
+   L415.04 18.0108
+   L415.141 18.0114
+   L415.242 18.0121
+   L415.344 18.0127
+   L415.445 18.0131
+   L415.546 18.0135
+   L415.648 18.0138
+   L415.749 18.014
+   L415.85 18.0141
+   L415.952 18.014
+   L416.053 18.0137
+   L416.154 18.0134
+   L416.255 18.0128
+   L416.357 18.0122
+   L416.458 18.0113
+   L416.559 18.0104
+   L416.661 18.0093
+   L416.762 18.008
+   L416.863 18.0067
+   L416.965 18.0052
+   L417.066 18.0037
+   L417.167 18.0021
+   L417.269 18.0005
+   L417.37 17.9988
+   L417.471 17.9971
+   L417.572 17.9954
+   L417.674 17.9937
+   L417.775 17.9921
+   L417.876 17.9905
+   L417.978 17.989
+   L418.079 17.9875
+   L418.18 17.9862" style="fill:none;stroke:#0000ff;stroke-linecap:square;stroke-width:6;"/>
        </g>
        <g id="line2d_8"/>
        <g id="text_4">
@@ -6834,66 +6845,66 @@ interpreted as body elements.</p>
    L411.899 38.7175
    L412.001 38.7175
    L412.102 38.7175
-   L412.203 38.7175
-   L412.304 38.7175
-   L412.406 38.7174
-   L412.507 38.7174
-   L412.608 38.7174
-   L412.71 38.7173
-   L412.811 38.7173
-   L412.912 38.7172
-   L413.014 38.7171
-   L413.115 38.717
-   L413.216 38.7169
-   L413.318 38.7167
-   L413.419 38.7165
-   L413.52 38.7162
-   L413.621 38.7159
-   L413.723 38.7156
-   L413.824 38.7152
-   L413.925 38.7147
-   L414.027 38.7141
-   L414.128 38.7135
-   L414.229 38.7128
-   L414.331 38.7119
-   L414.432 38.711
-   L414.533 38.71
-   L414.635 38.7088
-   L414.736 38.7076
-   L414.837 38.7062
-   L414.938 38.7047
-   L415.04 38.7031
-   L415.141 38.7013
-   L415.242 38.6995
-   L415.344 38.6975
-   L415.445 38.6955
-   L415.546 38.6934
-   L415.648 38.6912
-   L415.749 38.6889
-   L415.85 38.6866
-   L415.952 38.6843
-   L416.053 38.682
-   L416.154 38.6797
-   L416.255 38.6775
-   L416.357 38.6753
-   L416.458 38.6732
-   L416.559 38.6711
-   L416.661 38.6693
-   L416.762 38.6675
-   L416.863 38.666
-   L416.965 38.6646
-   L417.066 38.6634
-   L417.167 38.6624
-   L417.269 38.6617
-   L417.37 38.6612
-   L417.471 38.6609
-   L417.572 38.6608
-   L417.674 38.661
-   L417.775 38.6613
-   L417.876 38.6619
-   L417.978 38.6627
-   L418.079 38.6637
-   L418.18 38.6649" style="fill:none;stroke:#ff0000;stroke-linecap:square;stroke-width:6;"/>
+   L412.203 38.7176
+   L412.304 38.7176
+   L412.406 38.7176
+   L412.507 38.7176
+   L412.608 38.7177
+   L412.71 38.7178
+   L412.811 38.7178
+   L412.912 38.7179
+   L413.014 38.7181
+   L413.115 38.7182
+   L413.216 38.7184
+   L413.318 38.7186
+   L413.419 38.7188
+   L413.52 38.7191
+   L413.621 38.7194
+   L413.723 38.7197
+   L413.824 38.7201
+   L413.925 38.7205
+   L414.027 38.721
+   L414.128 38.7215
+   L414.229 38.7221
+   L414.331 38.7227
+   L414.432 38.7233
+   L414.533 38.724
+   L414.635 38.7247
+   L414.736 38.7254
+   L414.837 38.7262
+   L414.938 38.7269
+   L415.04 38.7277
+   L415.141 38.7285
+   L415.242 38.7293
+   L415.344 38.7301
+   L415.445 38.7309
+   L415.546 38.7316
+   L415.648 38.7324
+   L415.749 38.7331
+   L415.85 38.7338
+   L415.952 38.7345
+   L416.053 38.7352
+   L416.154 38.7358
+   L416.255 38.7365
+   L416.357 38.7371
+   L416.458 38.7377
+   L416.559 38.7383
+   L416.661 38.7389
+   L416.762 38.7395
+   L416.863 38.7402
+   L416.965 38.7408
+   L417.066 38.7415
+   L417.167 38.7421
+   L417.269 38.7428
+   L417.37 38.7436
+   L417.471 38.7443
+   L417.572 38.7451
+   L417.674 38.7459
+   L417.775 38.7467
+   L417.876 38.7476
+   L417.978 38.7484
+   L418.079 38.7492
+   L418.18 38.75" style="fill:none;stroke:#ff0000;stroke-linecap:square;stroke-width:6;"/>
        </g>
        <g id="line2d_10"/>
        <g id="text_5">
@@ -6925,15 +6936,15 @@ interpreted as body elements.</p>
    </svg>
 
 </div>
-<ul class="simple">
-<li>Some text describing the plot.</li>
-</ul>
-</div>
-<div class="right">
-<ul>
-<li><p class="first">You can also use a two-columns environment (of the same size), if the default floating behaviour around images, videos, etc. does not suit your needs.</p>
+            <ul class="simple">
+                <li>Some text describing the plot.</li>
+            </ul>
+            </div>
+            <div class="right">
+            <ul>
+                <li><p class="first">You can also use a two-columns environment (of the same size), if the default floating behaviour around images, videos, etc. does not suit your needs.</p>
 </li>
-<li><p class="first">You simply need to call twice the <tt class="docutils literal">column</tt> directive, once with the &quot;left&quot; argument, and once with &quot;right&quot; (in that order, otherwise it fails):</p>
+                <li><p class="first">You simply need to call twice the <tt class="docutils literal">column</tt> directive, once with the &quot;left&quot; argument, and once with &quot;right&quot; (in that order, otherwise it fails):</p>
 <pre class="literal-block">
 .. column:: left
 
@@ -6944,96 +6955,96 @@ interpreted as body elements.</p>
     * Content in the right column
 </pre>
 </li>
-</ul>
-</div></div>
-</section>
-</section>
-
-<section>
-<section>
-<h2>Configuring rst2reveal</h2>
-</section>
+            </ul>
+            </div></div>
+    </section>
 </section>
 
 <section>
+    <section>
+        <h2>Configuring rst2reveal</h2>
+    </section>
+</section>
+
 <section>
-<h2>Configuring rst2reveal</h2>
-<ul>
-<li><p class="first"><strong>rst2reveal</strong> can be used as a script after installation:</p>
+    <section>
+        <h2>Configuring rst2reveal</h2>
+            <ul>
+                <li><p class="first"><strong>rst2reveal</strong> can be used as a script after installation:</p>
 <pre class="literal-block">
 rst2reveal presentation.rst
 </pre>
 </li>
-<li><p class="first">This creates a <tt class="docutils literal">reveal/</tt> subfolder containing the Javascript and CSS code, and generates <tt class="docutils literal">presentation.html</tt> which can then be rendered in your browser.</p>
+                <li><p class="first">This creates a <tt class="docutils literal">reveal/</tt> subfolder containing the Javascript and CSS code, and generates <tt class="docutils literal">presentation.html</tt> which can then be rendered in your browser.</p>
 </li>
-<li><p class="first">You can also call it from Python: <tt class="docutils literal">help(rst2reveal.Parser)</tt></p>
+                <li><p class="first">You can also call it from Python: <tt class="docutils literal">help(rst2reveal.Parser)</tt></p>
 </li>
-</ul>
-<code><div class="highlight"><pre><span class="kn">from</span> <span class="nn">rst2reveal</span> <span class="kn">import</span> <span class="n">Parser</span>
+            </ul>
+            <code><div class="highlight"><pre><span class="kn">from</span> <span class="nn">rst2reveal</span> <span class="kn">import</span> <span class="n">Parser</span>
 <span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">(</span> <span class="n">input_file</span><span class="o">=</span><span class="s">&#39;index.rst&#39;</span><span class="p">,</span>
                  <span class="n">output_file</span><span class="o">=</span><span class="s">&#39;index.html&#39;</span><span class="p">,</span>
                  <span class="n">theme</span><span class="o">=</span><span class="s">&#39;beige&#39;</span> <span class="p">)</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">create_slides</span><span class="p">()</span>
 </pre></div>
-</code></section>
+</code>    </section>
 </section>
 
 <section>
-<section>
-<h2>Configuring rst2reveal</h2>
+    <section>
+        <h2>Configuring rst2reveal</h2>
 <p><strong>rst2reveal</strong> has plenty of options allowing to fine-tune your presentation (type <tt class="docutils literal">rst2reveal <span class="pre">-h</span></tt>):</p>
-<ul class="simple">
-<li>Horizontal and vertical alignment of the titles and slide content.</li>
-<li>The CSS theme (currently to be chosen between &quot;default&quot;, &quot;beige&quot; and &quot;night&quot;)</li>
-<li>The Javascript transition between the slides.</li>
-<li>The presence of a footer and slide numbers below the slides.</li>
-</ul>
-</section>
+            <ul class="simple">
+                <li>Horizontal and vertical alignment of the titles and slide content.</li>
+                <li>The CSS theme (currently to be chosen between &quot;default&quot;, &quot;beige&quot; and &quot;night&quot;)</li>
+                <li>The Javascript transition between the slides.</li>
+                <li>The presence of a footer and slide numbers below the slides.</li>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Defining your own theme</h2>
-<ul>
-<li><p class="first">To define your own CSS theme, you just need to inherit from the default theme, found at:</p>
+    <section>
+        <h2>Defining your own theme</h2>
+            <ul>
+                <li><p class="first">To define your own CSS theme, you just need to inherit from the default theme, found at:</p>
 <pre class="literal-block">
 ./reveal/css/theme/default.css
 </pre>
 </li>
-</ul>
+            </ul>
 <p>and modify the CSS properties that you need.</p>
-<ul>
-<li><p class="first">You can then specify this new theme with the argument:</p>
+            <ul>
+                <li><p class="first">You can then specify this new theme with the argument:</p>
 <pre class="literal-block">
 rst2reveal presentation.rst --stylesheet custom.css
 </pre>
 </li>
-<li><p class="first">You can also use both a basic theme and a slight modification in your own CSS file.</p>
+                <li><p class="first">You can also use both a basic theme and a slight modification in your own CSS file.</p>
 </li>
-</ul>
-</section>
+            </ul>
+    </section>
 </section>
 
 <section>
-<section>
-<h2>Using a configuration file</h2>
-<ul>
-<li><p class="first">To avoid re-typing all the arguments to <tt class="docutils literal">rst2reveal</tt>, you can also generate a configuration file with:</p>
+    <section>
+        <h2>Using a configuration file</h2>
+            <ul>
+                <li><p class="first">To avoid re-typing all the arguments to <tt class="docutils literal">rst2reveal</tt>, you can also generate a configuration file with:</p>
 <pre class="literal-block">
 rst2reveal --generate_configuration presentation.conf
 </pre>
 </li>
-<li><p class="first">Once adapted to your needs, you only need to call:</p>
+                <li><p class="first">Once adapted to your needs, you only need to call:</p>
 <pre class="literal-block">
 rst2reveal presentation.conf
 </pre>
 </li>
-</ul>
+            </ul>
 <p>to compile the ReST file with the desired options.</p>
-<ul class="simple">
-<li>The configuration file must end with <tt class="docutils literal">.conf</tt>, <tt class="docutils literal">.cfg</tt> or <tt class="docutils literal">.ini</tt>.</li>
-</ul>
-</section>
+            <ul class="simple">
+                <li>The configuration file must end with <tt class="docutils literal">.conf</tt>, <tt class="docutils literal">.cfg</tt> or <tt class="docutils literal">.ini</tt>.</li>
+            </ul>
+    </section>
 </section>
 
 
