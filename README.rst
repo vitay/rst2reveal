@@ -40,12 +40,12 @@ Simply clone the git repository and install it using setuptools::
 Usage
 -----
 
-Go in the ``docs/`` subfolder and compile the default presentation::
+An example is accessible at `this location <http://vitay.bitbucket.org/rst2reveal/presentation.html>`_ if you have a decent and recent browser (Firefox, Chrome, Opera).
+
+You can also go in the ``docs/`` subfolder and compile the presentation::
     
     cd docs/
     rst2reveal presentation.conf
-    
-You can then open the presentation ``presentation.html`` in a decent and recent browser (Firefox, Chrome, Opera).
 
 Command-line options
 --------------------
