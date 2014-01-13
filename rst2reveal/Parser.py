@@ -15,6 +15,7 @@ from PygmentsDirective import *
 from VideoDirective import *
 from PlotDirective import *
 from SmallRole import *
+from VspaceRole import *
 
 class Parser:
     """Class converting a stand-alone reST file into a Reveal.js-powered HTML5 file, using the provided options."""
