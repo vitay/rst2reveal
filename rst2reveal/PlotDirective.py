@@ -13,7 +13,7 @@ def plot_directive(name, arguments, options, content, lineno,
     try:
         import matplotlib.pylab 
     except:
-        print 'Warning: matplotlib is not installed on your system. Plots will not be generated.'
+        print('Warning: matplotlib is not installed on your system. Plots will not be generated.')
         return []
         
     # Process the options
@@ -38,8 +38,9 @@ def plot_directive(name, arguments, options, content, lineno,
         elif alpha > 1.0:
             alpha = 1.0
     except:
-        print 'Error: alpha must be a floating value between 0.0 and 1.0'
+        print('Error: alpha must be a floating value between 0.0 and 1.0')
         return []
+
     if 'invert' in options.keys():
         import matplotlib
         matplotlib.rcParams['figure.facecolor'] = 'b'
@@ -72,7 +73,7 @@ def plot_directive(name, arguments, options, content, lineno,
                 try:
                     mag = float(options['xkcd'])
                 except:
-                    print 'Error: the argument to :xkcd: must be a float.'
+                    print('Error: the argument to :xkcd: must be a float.')
                     return []
             else:
                 mag=1.5
@@ -90,11 +91,11 @@ def plot_directive(name, arguments, options, content, lineno,
         if 'save' in options.keys():
             fig.savefig(options['save'], dpi=600)
         
-    except Exception, e:
-        print 'Error while generating the figure:'
+    except Exception as e:
+        print('Error while generating the figure:')
         for line in content:
-            print '    ', line
-        print e
+            print('    ', line)
+        print(e)
         return []
 
         

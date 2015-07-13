@@ -15,7 +15,7 @@ def video_directive(name, args, options, content, lineno,
             contentOffset, blockText, state, stateMachine):
     """ Restructured text extension for inserting videos """
     if len(content) == 0:
-        print 'Error: no filename was provided to the video directive'
+        print('Error: no filename was provided to the video directive')
         return []
     # Check the type of the video
     filename = content[0]
@@ -26,7 +26,7 @@ def video_directive(name, args, options, content, lineno,
     elif filename.split('.')[-1] in ['mp4']:
         codec = 'mp4'
     else:
-        print 'Error: the video must be in .webm, .ogg, .ogv or .p4 format.'
+        print('Error: the video must be in .webm, .ogg, .ogv or .p4 format.')
         return []
     
     # Process the arguments

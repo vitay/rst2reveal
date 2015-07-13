@@ -7,15 +7,15 @@ except:
 import os, sys
 import docutils.core
 
-from RevealTranslator import RST2RevealTranslator, RST2RevealWriter
+from .RevealTranslator import RST2RevealTranslator, RST2RevealWriter
 
 # Import custom directives
-from TwoColumnsDirective import *
-from PygmentsDirective import *
-from VideoDirective import *
-from PlotDirective import *
-from SmallRole import *
-from VspaceRole import *
+from .TwoColumnsDirective import *
+from .PygmentsDirective import *
+from .VideoDirective import *
+from .PlotDirective import *
+from .SmallRole import *
+from .VspaceRole import *
 
 class Parser:
     """Class converting a stand-alone reST file into a Reveal.js-powered HTML5 file, using the provided options."""
@@ -147,8 +147,8 @@ class Parser:
                 import pygments
                 self.is_pygments = True
             except:
-                print 'Warning: Pygments is not installed, the code will not be highlighted.'
-                print 'You should install it with `pip install pygments`'
+                print('Warning: Pygments is not installed, the code will not be highlighted.')
+                print('You should install it with `pip install pygments`')
                 return
             os.chdir(curr_dir) 
             import subprocess, shutil

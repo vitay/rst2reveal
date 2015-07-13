@@ -17,7 +17,7 @@ Usage:
 
 # Define the nodes.
 from docutils import nodes
-from RevealTranslator import RST2RevealTranslator
+from .RevealTranslator import RST2RevealTranslator
 
 class LeftColumnNode(nodes.Part, nodes.Element): pass
 class RightColumnNode(nodes.Part, nodes.Element): pass 
@@ -36,7 +36,7 @@ def depart_right_column(self, node):
 
 def add_node(node, **kwds):
     nodes._add_node_class_names([node.__name__])
-    for key, val in kwds.iteritems():
+    for key, val in kwds.items():
         try:
             visit, depart = val
         except ValueError:

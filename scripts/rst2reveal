@@ -3,7 +3,7 @@ import os, sys
 import argparse
 import rst2reveal 
 
-print """rst2reveal: ReST to Reveal.js HTML5 slide generator."""
+print("rst2reveal: ReST to Reveal.js HTML5 slide generator.")
 
 # Test the presence of Pygments
 isPygments=False
@@ -11,7 +11,7 @@ try:
     from pygments.styles import STYLE_MAP
     isPygments=True
 except:
-    print "Pygments is not installed, code blocks won't be highlighted"
+    print("Pygments is not installed, code blocks won't be highlighted")
 
 # Allowed themes and transitions
 themes = ['default', 'beige', 'night']
@@ -63,8 +63,12 @@ args = parser.parse_args()
 # Parse arguments
 input_file=args.input_file
 if input_file.split('.')[-1] in ['conf', 'cfg', 'ini']:
-    print 'Reading from the configuration file', input_file + '.'
-    import ConfigParser 
+    print('Reading from the configuration file', input_file + '.')
+    try:
+        import ConfigParser 
+    except:
+        import configparser as ConfigParser
+        
     parser = ConfigParser.RawConfigParser()
     parser.read(input_file)
     # input file name
@@ -157,7 +161,7 @@ else:
         if args.theme in themes:
             theme = args.theme
         else:
-            print 'Error: theme', args.theme, 'does not exist. Using default theme.'
+            print('Error: theme', args.theme, 'does not exist. Using default theme.')
     else:
         theme = 'default' 
     # stylesheet
@@ -170,7 +174,7 @@ else:
         if args.transition in transitions:
             transition = args.transition
         else:
-            print 'Error: transition', args.transition, 'does not exist. Using default transition.'
+            print('Error: transition', args.transition, 'does not exist. Using default transition.')
     else:
         transition = 'linear'
     # pygments 
@@ -179,7 +183,7 @@ else:
             if args.pygments_style in pygments_styles:
                 pygments_style = args.pygments_style
             else:
-                print 'Error: Pygments style', args.pygments_style, 'does not exist. Using default style.'
+                print('Error: Pygments style', args.pygments_style, 'does not exist. Using default style.')
                 pygments_style = 'default'
         else:
             pygments_style = 'default'
@@ -191,7 +195,7 @@ else:
         if os.path.isfile(mathjax_path):
             mathjax_path = 'file://'+mathjax_path 
         elif not mathjax_path.startswith('http://'): # file does not exists or is not a valid http address 
-            print 'Error: ', mathjax_path, 'does not exist.'
+            print('Error: ', mathjax_path, 'does not exist.')
             exit(0)
     else:
         mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js'
@@ -221,9 +225,9 @@ else:
     # Generate a configuration file
     if args.generate_configuration:
         if args.generate_configuration.split('.')[-1] not in ['ini', 'cfg', 'conf']:
-            print 'Error: configuration file must have a .ini, .cfg or .conf extension'
+            print('Error: configuration file must have a .ini, .cfg or .conf extension')
             exit(0) 
-        print 'Generating the configuration file', args.generate_configuration, 'with current options.'
+        print('Generating the configuration file', args.generate_configuration, 'with current options.')
         import ConfigParser
         config = ConfigParser.RawConfigParser()
         config.add_section('rst2reveal')
@@ -258,7 +262,7 @@ else:
         with open(args.generate_configuration, 'wb') as configfile:
             config.write(configfile)
             
-        print 'You can now run: rst2reveal', args.generate_configuration
+        print('You can now run: rst2reveal', args.generate_configuration)
         exit(0)
 
 # Create the RST parser and create the slides
@@ -279,4 +283,4 @@ parser = rst2reveal.Parser(     input_file=filename,
                                 footer_template = footer_template )
                                 
 parser.create_slides()
-print 'The output is in', parser.output_file
+print('The output is in', parser.output_file)

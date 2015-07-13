@@ -14,7 +14,7 @@ def vspace_role(role, rawtext, text, lineno, inliner,
     try:
         nb_lines = int(text)
     except:
-        print 'Error in', rawtext, ': argument should be an integer.'
+        print('Error in', rawtext, ': argument should be an integer.')
         nb_lines=0
     node = nodes.raw('', '<br>'*nb_lines, format='html')
     return [node], []
