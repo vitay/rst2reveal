@@ -11,7 +11,7 @@ It aims at providing a quick and easy way to produce nice and consistent HTML5 s
 
 **Reveal.js** has more features than what **rst2reveal** can produce, so if you are more fluent in HTML than ReST, you should use it directly. 
 
-**rst2reveal** includes some parts of Reveal.js (mainly ``.js`` and ``.css`` files in ``rst2reveal/rst2reveal/reveal/``), so it is released under the same MIT license.
+**rst2reveal** includes some parts of Reveal.js (mainly ``.js`` and ``.css`` files in ``rst2reveal/reveal/``), so it is released under the same MIT license.
 
 Dependencies
 ------------
